@@ -9,31 +9,82 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Votacion { 
+public class Votacion {
     public static final String TABLE = "votacion";
 
     public static final String ID = "id";
-    
+
     public static final String IP = "ip";
-    
+
     public static final String NIVEL_ESTUDIO = "nivel_estudio";
 
-    public static final String TEMA = "tema";
+    public static final String TEMA = "id_tema";
+
+    public static final String VALORACION = "valoracion";
 
     @Id
     @GeneratedValue
-    @Column(name=ID)
+    @Column(name = ID)
     private Integer id;
-    
-    @Column(name=IP)
+
+    @Column(name = IP)
     private String ip;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_tema")
+    @JoinColumn(name = TEMA)
     private Tema tema;
-    
-    
-    
-    
+
+    @Column(name = VALORACION)
+    private Integer valoracion;
+
+    public Votacion() {
+
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public Tema getTema() {
+        return tema;
+    }
+
+    public void setTema(Tema tema) {
+        this.tema = tema;
+    }
+
+    public Integer getValoracion() {
+        return valoracion;
+    }
+
+    public void setValoracion(Integer valoracion) {
+        this.valoracion = valoracion;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        assert obj != null;
+        Votacion other = (Votacion) obj;
+        return id.equals(other.id) && tema.equals(other.tema) && ip.equals(other.ip)
+                && valoracion == other.valoracion;
+    }
+
+    @Override
+    public String toString() {
+        return "Votacion [id=" + id + ", tema=" + tema.toString() + ", valoracion=" + valoracion
+                + ", ip=" + ip + "]";
+    }
 
 }
