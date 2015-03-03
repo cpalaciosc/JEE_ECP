@@ -1,9 +1,10 @@
 package es.upm.miw.models.entities;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Embeddable
+@Entity
 public class Tema {
     
     public static final String TABLE = "tema";
@@ -15,6 +16,7 @@ public class Tema {
     public static final String PREGUNTA = "PREGUNTA";
     
     @Id
+    @GeneratedValue
     private Integer id;
 
     private String tema;
