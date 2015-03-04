@@ -7,28 +7,28 @@ import javax.persistence.Id;
 
 @Entity
 public class Tema {
-    
+
     public static final String TABLE = "tema";
 
-    public static final String ID = "id";    
+    public static final String ID = "id";
 
     public static final String CATEGORIA = "categoria";
 
     public static final String PREGUNTA = "pregunta";
-    
+
     public static final String VOTACION = "votacion";
-    
+
     @Id
     @GeneratedValue
-    @Column(name=ID)
+    @Column(name = ID)
     private Integer id;
 
-    @Column(name=CATEGORIA, nullable=false)
+    @Column(name = CATEGORIA, nullable = false)
     private String categoria;
 
-    @Column(name=PREGUNTA, nullable=false)
+    @Column(name = PREGUNTA, nullable = false)
     private String pregunta;
-    
+
     public Tema() {
 
     }
@@ -76,11 +76,16 @@ public class Tema {
     public String toString() {
         return "Tema [id=" + id + ", tema=" + categoria + ", pregunta=" + pregunta + "]";
     }
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 1;
+        final int prime = 31;
+        hash = hash * prime + this.id;
+        hash = hash * prime + (this.categoria == null ? 0 : this.categoria.hashCode());
+        hash = hash * prime + (this.pregunta == null ? 0 : this.pregunta.hashCode());
+        return hash;
+        
+    }
 
 }
