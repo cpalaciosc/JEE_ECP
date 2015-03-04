@@ -3,10 +3,14 @@ package es.upm.miw.models.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import es.upm.miw.models.utils.NivelEstudio;
 
 @Entity
 public class Votacion {
@@ -27,15 +31,19 @@ public class Votacion {
     @Column(name = ID)
     private Integer id;
 
-    @Column(name = IP, nullable=false)
+    @Column(name = IP, nullable = false)
     private String ip;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = TEMA, nullable=false)
+    @JoinColumn(name = TEMA, nullable = false)
     private Tema tema;
 
-    @Column(name = VALORACION, nullable=false)
+    @Column(name = VALORACION, nullable = false)
     private Integer valoracion;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = NIVEL_ESTUDIO)
+    private NivelEstudio nivelEstudio;
 
     public Votacion() {
 
@@ -73,18 +81,27 @@ public class Votacion {
         this.valoracion = valoracion;
     }
 
+    public NivelEstudio getNivelEstudio() {
+        return nivelEstudio;
+    }
+
+    public void setNivelEstudio(NivelEstudio nivelEstudio) {
+        this.nivelEstudio = nivelEstudio;
+    }
+
     @Override
     public boolean equals(Object obj) {
         assert obj != null;
         Votacion other = (Votacion) obj;
         return id.equals(other.id) && tema.equals(other.tema) && ip.equals(other.ip)
-                && valoracion == other.valoracion;
+                && valoracion == other.valoracion
+                && nivelEstudio == other.nivelEstudio;
     }
 
     @Override
     public String toString() {
         return "Votacion [id=" + id + ", tema=" + tema.toString() + ", valoracion=" + valoracion
-                + ", ip=" + ip + "]";
+                + ", ip=" + ip + "nivel de estudio="+nivelEstudio+"]";
     }
 
 }
