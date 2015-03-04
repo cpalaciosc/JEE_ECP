@@ -1,13 +1,9 @@
 package es.upm.miw.models.entities;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Tema {
@@ -16,7 +12,7 @@ public class Tema {
 
     public static final String ID = "id";    
 
-    public static final String TEMA = "tema";
+    public static final String CATEGORIA = "categoria";
 
     public static final String PREGUNTA = "pregunta";
     
@@ -27,15 +23,12 @@ public class Tema {
     @Column(name=ID)
     private Integer id;
 
-    @Column(name=TEMA, nullable=false)
-    private String tema;
+    @Column(name=CATEGORIA, nullable=false)
+    private String categoria;
 
     @Column(name=PREGUNTA, nullable=false)
     private String pregunta;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = TEMA)
-    private List<Votacion> votaciones;
-
     public Tema() {
 
     }
@@ -43,7 +36,7 @@ public class Tema {
     public Tema(Integer id, String tema, String pregunta) {
         super();
         this.id = id;
-        this.tema = tema;
+        this.categoria = tema;
         this.pregunta = pregunta;
     }
 
@@ -56,11 +49,11 @@ public class Tema {
     }
 
     public String getTema() {
-        return tema;
+        return categoria;
     }
 
     public void setTema(String tema) {
-        this.tema = tema;
+        this.categoria = tema;
     }
 
     public String getPregunta() {
@@ -75,13 +68,13 @@ public class Tema {
     public boolean equals(Object obj) {
         assert obj != null;
         Tema other = (Tema) obj;
-        return id.equals(other.id) && tema.equals(other.tema)
+        return id.equals(other.id) && categoria.equals(other.categoria)
                 && pregunta.equals(other.pregunta);
     }
 
     @Override
     public String toString() {
-        return "Tema [id=" + id + ", tema=" + tema + ", pregunta=" + pregunta + "]";
+        return "Tema [id=" + id + ", tema=" + categoria + ", pregunta=" + pregunta + "]";
     }
     
     
