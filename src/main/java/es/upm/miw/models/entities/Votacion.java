@@ -103,5 +103,17 @@ public class Votacion {
         return "Votacion [id=" + id + ", tema=" + tema.toString() + ", valoracion=" + valoracion
                 + ", ip=" + ip + "nivel de estudio="+nivelEstudio+"]";
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 1;
+        final int prime = 31;
+        hash = hash * prime + (this.valoracion == null ? 0 : this.valoracion.hashCode());
+        hash = hash * prime + (this.ip == null ? 0 : this.ip.hashCode());
+        hash = hash * prime + this.id;
+        hash = hash * prime + this.nivelEstudio.valor;
+        return hash;
+        
+    }    
 
 }
