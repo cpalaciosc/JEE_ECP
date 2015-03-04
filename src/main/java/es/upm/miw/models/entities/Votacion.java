@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Votacion {
@@ -27,14 +27,14 @@ public class Votacion {
     @Column(name = ID)
     private Integer id;
 
-    @Column(name = IP)
+    @Column(name = IP, nullable=false)
     private String ip;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = TEMA)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = TEMA, nullable=false)
     private Tema tema;
 
-    @Column(name = VALORACION)
+    @Column(name = VALORACION, nullable=false)
     private Integer valoracion;
 
     public Votacion() {
