@@ -1,9 +1,13 @@
 package es.upm.miw.models.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Tema {
@@ -16,16 +20,21 @@ public class Tema {
 
     public static final String PREGUNTA = "pregunta";
     
+    public static final String VOTACION = "votacion";
+    
     @Id
     @GeneratedValue
     @Column(name=ID)
     private Integer id;
 
-    @Column(name=TEMA)
+    @Column(name=TEMA, nullable=false)
     private String tema;
 
-    @Column(name=PREGUNTA)
+    @Column(name=PREGUNTA, nullable=false)
     private String pregunta;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = TEMA)
+    private List<Votacion> votaciones;
 
     public Tema() {
 
