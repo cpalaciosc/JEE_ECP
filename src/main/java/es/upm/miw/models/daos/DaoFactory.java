@@ -16,5 +16,4 @@ public abstract class DaoFactory {
 
     public abstract VotacionDao getVotacionDao();
 
-
 }
