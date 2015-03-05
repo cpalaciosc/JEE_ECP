@@ -42,10 +42,6 @@ public class Tema {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getTema() {
         return categoria;
     }
