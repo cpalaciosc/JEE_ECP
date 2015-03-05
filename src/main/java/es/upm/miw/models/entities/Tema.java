@@ -16,8 +16,6 @@ public class Tema {
 
     public static final String PREGUNTA = "pregunta";
 
-    public static final String VOTACION = "votacion";
-
     @Id
     @GeneratedValue
     @Column(name = ID)
