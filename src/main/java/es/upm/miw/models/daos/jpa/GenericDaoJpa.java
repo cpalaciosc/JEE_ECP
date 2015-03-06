@@ -3,6 +3,7 @@ package es.upm.miw.models.daos.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -105,6 +106,28 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
         List<T> result = typedQuery.getResultList();
         entityManager.close();
         return result;
+    }
+
+    @Override
+    public void deleteAll() {
+        EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
+        if(entityManager!=null){
+            try{
+                entityManager.getTransaction().begin();
+                Query query = entityManager.createQuery(String.format("DELETE FROM %s","tema"));
+                int count = query.executeUpdate();
+                entityManager.getTransaction().commit();
+                LogManager.getLogger(GenericDaoJpa.class).debug("deleteAll: " + count+ " records");                
+            } catch (Exception e) {
+                LogManager.getLogger(GenericDaoJpa.class).error("deleteAll: " + e);
+                e.printStackTrace();
+                if (entityManager.getTransaction().isActive())
+                    entityManager.getTransaction().rollback();
+            } finally {
+                entityManager.close();
+            }            
+        }
+        
     }
 
 }
