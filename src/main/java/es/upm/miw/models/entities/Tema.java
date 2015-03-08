@@ -42,12 +42,12 @@ public class Tema {
         return id;
     }
 
-    public String getTema() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setTema(String tema) {
-        this.categoria = tema;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getPregunta() {
@@ -79,7 +79,7 @@ public class Tema {
         hash = hash * prime + (this.categoria == null ? 0 : this.categoria.hashCode());
         hash = hash * prime + (this.pregunta == null ? 0 : this.pregunta.hashCode());
         return hash;
-        
+
     }
 
 }
