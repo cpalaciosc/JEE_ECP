@@ -34,7 +34,7 @@ public class Votacion {
     @Column(name = IP, nullable = false, length=15)
     private String ip;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = TEMA, nullable = false)
     private Tema tema;
 
@@ -42,12 +42,23 @@ public class Votacion {
     private Integer valoracion;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = NIVEL_ESTUDIO, length=1, nullable=false)
+    @Column(name = NIVEL_ESTUDIO, nullable=false)
     private NivelEstudio nivelEstudio;
 
     public Votacion() {
 
     }
+
+    public Votacion(Integer id, String ip, Tema tema, Integer valoracion, NivelEstudio nivelEstudio) {
+        super();
+        this.id = id;
+        this.ip = ip;
+        this.tema = tema;
+        this.valoracion = valoracion;
+        this.nivelEstudio = nivelEstudio;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -97,7 +108,7 @@ public class Votacion {
     @Override
     public String toString() {
         return "Votacion [id=" + id + ", tema=" + tema.toString() + ", valoracion=" + valoracion
-                + ", ip=" + ip + "nivel de estudio="+nivelEstudio+"]";
+                + ", ip=" + ip + ", nivel de estudio="+nivelEstudio+"]";
     }
     
     @Override
@@ -107,7 +118,7 @@ public class Votacion {
         hash = hash * prime + (this.valoracion == null ? 0 : this.valoracion.hashCode());
         hash = hash * prime + (this.ip == null ? 0 : this.ip.hashCode());
         hash = hash * prime + this.id;
-        hash = hash * prime + (this.nivelEstudio.valor == null ? 0 : this.nivelEstudio.valor.hashCode());
+        hash = hash * prime + (this.nivelEstudio == null ? 0 : this.nivelEstudio.hashCode());
         return hash;
         
     }    
