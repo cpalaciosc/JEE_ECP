@@ -15,7 +15,7 @@ import es.upm.miw.models.entities.Tema;
 public class DaoJdbcFactory extends DaoFactory {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 
-    private static final String URL = "jdbc:mysql://localhost:3306/jee";
+    private static final String URL = "jdbc:mysql://localhost:3306/miwjee";
 
     private static final String USER = "root";
 
