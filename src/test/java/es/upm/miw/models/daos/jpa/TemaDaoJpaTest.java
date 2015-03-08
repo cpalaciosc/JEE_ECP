@@ -71,7 +71,7 @@ public class TemaDaoJpaTest {
     @After
     public void after() {
         LogManager.getLogger(TemaDaoJpaTest.class).debug(
-                "Vaciando la base de datos antes de salir - drop and create tables");
+                "Limpiando tablas afectadas");
         dao.deleteAll();
     }
     
