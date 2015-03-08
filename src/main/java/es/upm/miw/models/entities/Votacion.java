@@ -29,7 +29,7 @@ public class Votacion {
     @Id
     @GeneratedValue
     @Column(name = ID)
-    private Integer id;
+    private Integer id; 
 
     @Column(name = IP, nullable = false, length=15)
     private String ip;
