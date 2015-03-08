@@ -19,6 +19,8 @@ public abstract class GenericDaoJdbc<T, ID> implements GenericDao<T, ID> {
 
     protected static final String SQL_SELECT_LAST_ID = "SELECT LAST_INSERT_ID()";
 
+    private static final String SQL_DELETE_ALL = "DELETE FROM %s";
+
     private Logger log = LogManager.getLogger(GenericDaoJdbc.class);
 
     public ResultSet query(String sql) {
@@ -55,6 +57,12 @@ public abstract class GenericDaoJdbc<T, ID> implements GenericDao<T, ID> {
             this.log.error(e.getMessage());
         }
         return -1;
+    }
+
+    protected abstract String getNativeTableName();
+
+    public void deleteAll() {
+        this.updateSql(String.format(SQL_DELETE_ALL, getNativeTableName()));
     }
 
 }
