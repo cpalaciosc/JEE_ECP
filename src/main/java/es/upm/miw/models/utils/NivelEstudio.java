@@ -1,11 +1,11 @@
 package es.upm.miw.models.utils;
 
 public enum NivelEstudio {
-    PRIMARIA(1), SECUNDARIA(2), GRADO(3), MASTER(4), DOCTORADO(5);
+    PRIMARIA("P"), SECUNDARIA("S"), GRADO("G"), MASTER("M"), DOCTORADO("D");
     
-    public int valor;
+    public String valor;
     
-    private NivelEstudio(int valor){
+    private NivelEstudio(String valor){
         this.valor = valor;
     }
 
