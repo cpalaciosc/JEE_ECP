@@ -16,8 +16,7 @@ import es.upm.miw.models.daos.VotacionDao;
 public class DaoJpaFactory extends DaoFactory {
     private static final String PERSISTENCE_UNIT = "JEE_ECP";
 
-    private static EntityManagerFactory entityManagerFactory = Persistence
-            .createEntityManagerFactory(PERSISTENCE_UNIT);
+    private static EntityManagerFactory entityManagerFactory;
 
     public DaoJpaFactory() {
         LogManager.getLogger(DaoJpaFactory.class).debug("create Entity Manager Factory");
@@ -32,6 +31,9 @@ public class DaoJpaFactory extends DaoFactory {
     }
 
     public static EntityManagerFactory getEntityManagerFactory() {
+        if (entityManagerFactory == null) {
+            entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+        }
         return entityManagerFactory;
     }
 
