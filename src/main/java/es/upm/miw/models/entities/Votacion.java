@@ -42,7 +42,7 @@ public class Votacion {
     private Integer valoracion;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = NIVEL_ESTUDIO)
+    @Column(name = NIVEL_ESTUDIO, length=1, nullable=false)
     private NivelEstudio nivelEstudio;
 
     public Votacion() {
@@ -107,7 +107,7 @@ public class Votacion {
         hash = hash * prime + (this.valoracion == null ? 0 : this.valoracion.hashCode());
         hash = hash * prime + (this.ip == null ? 0 : this.ip.hashCode());
         hash = hash * prime + this.id;
-        hash = hash * prime + this.nivelEstudio.valor;
+        hash = hash * prime + (this.nivelEstudio.valor == null ? 0 : this.nivelEstudio.valor.hashCode());
         return hash;
         
     }    
