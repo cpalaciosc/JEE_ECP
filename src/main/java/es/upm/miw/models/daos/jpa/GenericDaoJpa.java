@@ -121,7 +121,7 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
             } catch (Exception e) {
                 LogManager.getLogger(GenericDaoJpa.class).error("deleteAll: " + e);
                 e.printStackTrace();
-                if (entityManager.getTransaction().isActive())
+                if (entityManager.getTransaction().isActive()) 
                     entityManager.getTransaction().rollback();
             } finally {
                 entityManager.close();
