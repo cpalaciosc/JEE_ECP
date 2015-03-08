@@ -31,7 +31,7 @@ public class Votacion {
     @Column(name = ID)
     private Integer id;
 
-    @Column(name = IP, nullable = false)
+    @Column(name = IP, nullable = false, length=15)
     private String ip;
 
     @ManyToOne(cascade = CascadeType.ALL)
