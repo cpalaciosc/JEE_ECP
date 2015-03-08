@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import es.upm.miw.models.daos.GenericDao;
 
 public abstract class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
+    private static final String SQL_DELETE_ALL = "DELETE FROM %s";
     private Class<T> persistentClass;
 
     public GenericDaoJpa(Class<T> persistentClass) {
@@ -116,7 +117,7 @@ public abstract class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
         if(entityManager!=null){
             try{
                 entityManager.getTransaction().begin();
-                Query query = entityManager.createNativeQuery(String.format("DELETE FROM %s",getNativeTableName()));
+                Query query = entityManager.createNativeQuery(String.format(SQL_DELETE_ALL,getNativeTableName()));
                 int count = query.executeUpdate();
                 entityManager.getTransaction().commit();
                 LogManager.getLogger(GenericDaoJpa.class).debug("Se borraron " + count+ " registros");                
