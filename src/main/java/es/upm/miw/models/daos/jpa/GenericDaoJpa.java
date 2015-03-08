@@ -13,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
 
 import es.upm.miw.models.daos.GenericDao;
 
-public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
+public abstract class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
     private Class<T> persistentClass;
 
     public GenericDaoJpa(Class<T> persistentClass) {
@@ -107,6 +107,8 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
         entityManager.close();
         return result;
     }
+    
+    protected abstract String getNativeTableName();
 
     @Override
     public void deleteAll() {
@@ -114,10 +116,10 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
         if(entityManager!=null){
             try{
                 entityManager.getTransaction().begin();
-                Query query = entityManager.createQuery(String.format("DELETE FROM %s","tema"));
+                Query query = entityManager.createNativeQuery(String.format("DELETE FROM %s",getNativeTableName()));
                 int count = query.executeUpdate();
                 entityManager.getTransaction().commit();
-                LogManager.getLogger(GenericDaoJpa.class).debug("deleteAll: " + count+ " records");                
+                LogManager.getLogger(GenericDaoJpa.class).debug("Se borraron " + count+ " registros");                
             } catch (Exception e) {
                 LogManager.getLogger(GenericDaoJpa.class).error("deleteAll: " + e);
                 e.printStackTrace();

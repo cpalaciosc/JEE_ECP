@@ -9,4 +9,9 @@ public class VotacionDaoJpa extends GenericDaoJpa<Votacion, Integer> implements 
         super(Votacion.class);
     }
 
+    @Override
+    protected String getNativeTableName() {
+        return Votacion.TABLE;
+    }
+
 }
