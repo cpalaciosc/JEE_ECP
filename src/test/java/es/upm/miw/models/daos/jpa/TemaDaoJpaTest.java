@@ -29,16 +29,17 @@ public class TemaDaoJpaTest {
     @Before
     public void before() {
         LogManager.getLogger(clazz).debug("Inicio de before()");
-        this.tema = new Tema("Tema1", "Pregunta1");
         dao = DaoFactory.getFactory().getTemaDao();
-        dao.create(this.tema);
+        dao.deleteAll();
+        tema = new Tema("Tema1", "Pregunta1");
+        dao.create(tema);
         LogManager.getLogger(clazz).debug("Fin de before()");
     }
 
     @Test
     public void testRead() {
         LogManager.getLogger(clazz).debug("Inicio de testRead()");
-        assertEquals(this.tema, dao.read(this.tema.getId()));
+        assertEquals(this.tema, dao.read(tema.getId()));
         LogManager.getLogger(clazz).debug("Fin de testRead()");
     }
 
@@ -46,16 +47,16 @@ public class TemaDaoJpaTest {
     public void testUpdate() {
         LogManager.getLogger(clazz).debug("Inicio de testUpdate()");
         this.tema.setPregunta("Pregunta1 Actualizada");
-        dao.update(this.tema);
-        assertEquals(this.tema.getPregunta(), dao.read(this.tema.getId()).getPregunta());
+        dao.update(tema);
+        assertEquals(tema.getPregunta(), dao.read(tema.getId()).getPregunta());
         LogManager.getLogger(clazz).debug("Fin de testUpdate()");
     }
 
     @Test
     public void testDeleteByID() {
         LogManager.getLogger(clazz).debug("Inicio de testDeleteByID()");
-        dao.deleteById(this.tema.getId());
-        assertNull(dao.read(this.tema.getId()));
+        dao.deleteById(tema.getId());
+        assertNull(dao.read(tema.getId()));
         LogManager.getLogger(clazz).debug("Fin de testDeleteByID()");
     }
 
