@@ -23,16 +23,18 @@ public class TemaDaoJdbcTest {
 
     @BeforeClass
     public static void beforeClass() {
+        LogManager.getLogger(clazz).debug("Inicializando los test");
         DaoFactory.setFactory(new DaoJdbcFactory());
-        DaoJdbcFactory.dropAndCreateTables();
     }
 
     @Before
     public void before() {
         LogManager.getLogger(clazz).debug("Inicio de before()");
-        this.tema = new Tema("Tema1", "Pregunta1");
         dao = DaoFactory.getFactory().getTemaDao();
+        dao.deleteAll();
+        tema = new Tema("Tema1", "Pregunta1");
         dao.create(tema);
+        LogManager.getLogger(clazz).debug("id generado "+tema.getId());
         LogManager.getLogger(clazz).debug("Fin de before()");
     }
 
@@ -74,5 +76,5 @@ public class TemaDaoJdbcTest {
         LogManager.getLogger(clazz).debug("Limpiando tablas afectadas");
         dao.deleteAll();
     }
-    
+
 }
