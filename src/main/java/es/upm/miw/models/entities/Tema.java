@@ -18,7 +18,7 @@ public class Tema {
     public static final String PREGUNTA = "pregunta";
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = ID)
     private Integer id;
 
@@ -44,6 +44,10 @@ public class Tema {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCategoria() {
