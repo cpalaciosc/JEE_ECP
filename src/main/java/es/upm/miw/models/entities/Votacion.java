@@ -1,6 +1,5 @@
 package es.upm.miw.models.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -35,7 +34,7 @@ public class Votacion {
     @Column(name = IP, nullable = false, length = 15)
     private String ip;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = TEMA, nullable = false)
     private Tema tema;
 
