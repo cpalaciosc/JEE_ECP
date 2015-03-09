@@ -1,21 +1,21 @@
 package es.upm.miw.models.daos.jdbc;
 
-import static org.junit.Assert.*;
-import org.apache.logging.log4j.LogManager;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
+import org.apache.logging.log4j.LogManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.upm.miw.models.daos.DaoFactory;
-import es.upm.miw.models.daos.TemaDao;
-import es.upm.miw.models.daos.jdbc.DaoJdbcFactory;
+import es.upm.miw.models.daos.ITemaDao;
 import es.upm.miw.models.entities.Tema;
 
 public class TemaDaoJdbcTest {
 
-    private TemaDao dao;
+    private ITemaDao dao;
 
     private Tema tema;
 
@@ -30,7 +30,7 @@ public class TemaDaoJdbcTest {
     @Before
     public void before() {
         LogManager.getLogger(clazz).debug("Inicio de before()");
-        this.tema = new Tema(1, "Tema1", "Pregunta1");
+        this.tema = new Tema("Tema1", "Pregunta1");
         dao = DaoFactory.getFactory().getTemaDao();
         dao.create(tema);
         LogManager.getLogger(clazz).debug("Fin de before()");
@@ -63,17 +63,16 @@ public class TemaDaoJdbcTest {
     @Test
     public void testFindAll() {
         LogManager.getLogger(clazz).debug("Inicio de testFindAll()");
-        dao.create(new Tema(2, "Tema2", "Pregunta2"));
-        dao.create(new Tema(3, "Tema3", "Pregunta3"));
+        dao.create(new Tema("Tema2", "Pregunta2"));
+        dao.create(new Tema("Tema3", "Pregunta3"));
         assertEquals(3, dao.findAll().size());
         LogManager.getLogger(clazz).debug("Fin de testFindAll()");
     }
 
     @After
     public void after() {
-        LogManager.getLogger(clazz).debug(
-                "Limpiando tablas afectadas");
+        LogManager.getLogger(clazz).debug("Limpiando tablas afectadas");
         dao.deleteAll();
     }
-
+    
 }
