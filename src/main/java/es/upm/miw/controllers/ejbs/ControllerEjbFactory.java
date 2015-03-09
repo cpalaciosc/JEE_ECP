@@ -11,7 +11,7 @@ import es.upm.miw.controllers.IVotarController;
 
 @ManagedBean(name = "controllerFactory")
 @SessionScoped
-public class ControllerEjbFactory extends ControllerFactory {
+public class ControllerEjbFactory extends ControllerFactory { 
 
     @Override
     public IEliminarTemaController getEliminarTemaController() {
