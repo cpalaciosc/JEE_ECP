@@ -36,16 +36,23 @@ public abstract class GenericDaoJdbc<T, ID> implements IGenericDao<T, ID> {
         return null;
     }
 
-    public void updateSql(String sql) {
+    public int updateSql(String sql) {
+        int idGenerado = -1;
         try {
             Statement statement = DaoJdbcFactory.getConnection().createStatement();
-            statement.executeUpdate(sql);
+            statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()){
+                idGenerado=rs.getInt(1);
+            }            
             this.log.debug("UpdateSql: " + sql);
         } catch (SQLException e) {
             this.log.error("Update SQL: ---" + sql + "---");
             this.log.error(e.getMessage());
         }
-    }
+        
+        return idGenerado;
+    }    
 
     public int autoId() {
         ResultSet resulSet = this.query(SQL_SELECT_LAST_ID);
