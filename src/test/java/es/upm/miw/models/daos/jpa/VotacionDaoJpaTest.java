@@ -10,15 +10,20 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.upm.miw.models.daos.DaoFactory;
-import es.upm.miw.models.daos.VotacionDao;
+import es.upm.miw.models.daos.ITemaDao;
+import es.upm.miw.models.daos.IVotacionDao;
 import es.upm.miw.models.entities.Tema;
 import es.upm.miw.models.entities.Votacion;
 import es.upm.miw.models.utils.NivelEstudio;
 
 public class VotacionDaoJpaTest {
-    private VotacionDao dao;
+    private IVotacionDao votacionDao;
+
+    private ITemaDao temaDao;
 
     private Votacion votacion;
+
+    private Tema tema;
 
     final static Class<VotacionDaoJpaTest> clazz = VotacionDaoJpaTest.class;
 
@@ -32,18 +37,20 @@ public class VotacionDaoJpaTest {
     @Before
     public void before() {
         LogManager.getLogger(clazz).debug("Inicio de before()");
-        DaoFactory.getFactory().getTemaDao().deleteAll();  
-        this.votacion = new Votacion(1, "255.255.255.255", new Tema(1, "Tema1", "Pregunta1"), 1,
-                NivelEstudio.DOCTORADO);
-        dao = DaoFactory.getFactory().getVotacionDao();
-        dao.create(votacion);
+        temaDao = DaoFactory.getFactory().getTemaDao();
+        temaDao.deleteAll();
+        tema = new Tema("Tema1", "Pregunta1");
+        temaDao.create(tema);
+        votacion = new Votacion(1, "255.255.255.255", tema, 1, NivelEstudio.DOCTORADO);
+        votacionDao = DaoFactory.getFactory().getVotacionDao();
+        votacionDao.create(votacion);
         LogManager.getLogger(clazz).debug("Fin de before()");
     }
 
     @Test
     public void testRead() {
         LogManager.getLogger(clazz).debug("Inicio de testRead()");
-        assertEquals(votacion, dao.read(votacion.getId()));
+        assertEquals(votacion, votacionDao.read(votacion.getId()));
         LogManager.getLogger(clazz).debug("Fin de testRead()");
     }
 
@@ -51,33 +58,34 @@ public class VotacionDaoJpaTest {
     public void testUpdate() {
         LogManager.getLogger(clazz).debug("Inicio de testUpdate()");
         this.votacion.setNivelEstudio(NivelEstudio.GRADO);
-        dao.update(this.votacion);
-        assertEquals(votacion.getNivelEstudio(), dao.read(votacion.getId()).getNivelEstudio());
+        votacionDao.update(this.votacion);
+        assertEquals(votacion.getNivelEstudio(), votacionDao.read(votacion.getId())
+                .getNivelEstudio());
         LogManager.getLogger(clazz).debug("Fin de testUpdate()");
     }
 
     @Test
     public void testDeleteByID() {
         LogManager.getLogger(clazz).debug("Inicio de testDeleteByID()");
-        dao.deleteById(votacion.getId());
-        assertNull(dao.read(votacion.getId()));
+        votacionDao.deleteById(votacion.getId());
+        assertNull(votacionDao.read(votacion.getId()));
         LogManager.getLogger(clazz).debug("Fin de testDeleteByID()");
     }
 
     @Test
     public void testFindAll() {
         LogManager.getLogger(clazz).debug("Inicio de testFindAll()");
-        Tema tema = new Tema(1, "Tema1", "Pregunta1");
-        dao.create(new Votacion(2, "255.255.255.255", tema, 2, NivelEstudio.GRADO));
-        dao.create(new Votacion(3, "255.255.255.255", tema, 3, NivelEstudio.PRIMARIA));
-        assertEquals(3, dao.findAll().size());
+        votacionDao.create(new Votacion(2, "255.255.255.255", tema, 2, NivelEstudio.GRADO));
+        votacionDao.create(new Votacion(3, "255.255.255.255", tema, 3, NivelEstudio.PRIMARIA));
+        assertEquals(3, votacionDao.findAll().size());
         LogManager.getLogger(clazz).debug("Fin de testFindAll()");
     }
 
     @After
     public void after() {
         LogManager.getLogger(clazz).debug("Limpiando tablas afectadas");
-        dao.deleteAll();
+        votacionDao.deleteAll();
+        temaDao.deleteAll();
     }
 
 }
