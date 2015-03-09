@@ -28,7 +28,7 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements ITemaD
         return null;
     }
 
-    private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL, %s VARCHAR(255) NOT NULL, "
+    private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL AUTO_INCREMENT, %s VARCHAR(255) NOT NULL, "
             + "%s VARCHAR(255) NOT NULL, PRIMARY KEY (%s))";
 
     public static String sqlToCreateTable() {
@@ -36,12 +36,13 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements ITemaD
                 Tema.PREGUNTA, Tema.ID);
     }
 
-    private static final String SQL_INSERT = "INSERT INTO %s (%s,%s,%s) VALUES (%d,'%s','%s')";
+    private static final String SQL_INSERT = "INSERT INTO %s (%s,%s) VALUES ('%s','%s')";
 
     @Override
     public void create(Tema tema) {
-        this.updateSql(String.format(SQL_INSERT, Tema.TABLE, Tema.ID, Tema.CATEGORIA,
-                Tema.PREGUNTA, tema.getId(), tema.getCategoria(), tema.getPregunta()));
+        int id = this.updateSql(String.format(SQL_INSERT, Tema.TABLE, Tema.CATEGORIA,
+                Tema.PREGUNTA, tema.getCategoria(), tema.getPregunta()));
+        tema.setId(id);
     }
 
     @Override
