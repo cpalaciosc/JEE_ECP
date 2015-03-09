@@ -3,6 +3,7 @@ package es.upm.miw.models.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -17,7 +18,7 @@ public class Tema {
     public static final String PREGUNTA = "pregunta";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     @Column(name = ID)
     private Integer id;
 
@@ -31,11 +32,14 @@ public class Tema {
 
     }
 
-    public Tema(Integer id, String tema, String pregunta) {
-        super();
-        this.id = id;
+    public Tema(String tema, String pregunta) {
         this.categoria = tema;
         this.pregunta = pregunta;
+    }
+
+    public Tema(Integer id, String tema, String pregunta) {
+        this(tema, pregunta);
+        this.id = id;
     }
 
     public Integer getId() {

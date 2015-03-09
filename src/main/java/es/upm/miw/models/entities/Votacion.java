@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,11 +28,11 @@ public class Votacion {
     public static final String VALORACION = "valoracion";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     @Column(name = ID)
-    private Integer id; 
+    private Integer id;
 
-    @Column(name = IP, nullable = false, length=15)
+    @Column(name = IP, nullable = false, length = 15)
     private String ip;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -42,23 +43,23 @@ public class Votacion {
     private Integer valoracion;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = NIVEL_ESTUDIO, nullable=false)
+    @Column(name = NIVEL_ESTUDIO, nullable = false)
     private NivelEstudio nivelEstudio;
 
     public Votacion() {
-
     }
 
-    public Votacion(Integer id, String ip, Tema tema, Integer valoracion, NivelEstudio nivelEstudio) {
-        super();
-        this.id = id;
+    public Votacion(String ip, Tema tema, Integer valoracion, NivelEstudio nivelEstudio) {
         this.ip = ip;
         this.tema = tema;
         this.valoracion = valoracion;
         this.nivelEstudio = nivelEstudio;
     }
 
-
+    public Votacion(Integer id, String ip, Tema tema, Integer valoracion, NivelEstudio nivelEstudio) {
+        this(ip, tema, valoracion, nivelEstudio);
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;
@@ -101,16 +102,15 @@ public class Votacion {
         assert obj != null;
         Votacion other = (Votacion) obj;
         return id.equals(other.id) && tema.equals(other.tema) && ip.equals(other.ip)
-                && valoracion == other.valoracion
-                && nivelEstudio == other.nivelEstudio;
+                && valoracion == other.valoracion && nivelEstudio == other.nivelEstudio;
     }
 
     @Override
     public String toString() {
         return "Votacion [id=" + id + ", tema=" + tema.toString() + ", valoracion=" + valoracion
-                + ", ip=" + ip + ", nivel de estudio="+nivelEstudio+"]";
+                + ", ip=" + ip + ", nivel de estudio=" + nivelEstudio + "]";
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 1;
@@ -120,7 +120,7 @@ public class Votacion {
         hash = hash * prime + this.id;
         hash = hash * prime + (this.nivelEstudio == null ? 0 : this.nivelEstudio.hashCode());
         return hash;
-        
-    }    
+
+    }
 
 }
