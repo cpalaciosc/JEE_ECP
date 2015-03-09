@@ -10,8 +10,8 @@ import org.apache.logging.log4j.LogManager;
 import org.eclipse.persistence.config.PersistenceUnitProperties;
 
 import es.upm.miw.models.daos.DaoFactory;
-import es.upm.miw.models.daos.TemaDao;
-import es.upm.miw.models.daos.VotacionDao;
+import es.upm.miw.models.daos.ITemaDao;
+import es.upm.miw.models.daos.IVotacionDao;
 
 public class DaoJpaFactory extends DaoFactory {
     private static final String PERSISTENCE_UNIT = "JEE_ECP";
@@ -38,12 +38,12 @@ public class DaoJpaFactory extends DaoFactory {
     }
 
     @Override
-    public TemaDao getTemaDao() {
+    public ITemaDao getTemaDao() {
         return new TemaDaoJpa();
     }
 
     @Override
-    public VotacionDao getVotacionDao() {
+    public IVotacionDao getVotacionDao() {
         return new VotacionDaoJpa();
     }
 

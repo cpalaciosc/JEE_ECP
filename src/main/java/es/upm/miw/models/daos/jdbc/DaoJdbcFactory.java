@@ -8,8 +8,8 @@ import java.sql.Statement;
 import org.apache.logging.log4j.LogManager;
 
 import es.upm.miw.models.daos.DaoFactory;
-import es.upm.miw.models.daos.TemaDao;
-import es.upm.miw.models.daos.VotacionDao;
+import es.upm.miw.models.daos.ITemaDao;
+import es.upm.miw.models.daos.IVotacionDao;
 import es.upm.miw.models.entities.Tema;
 
 public class DaoJdbcFactory extends DaoFactory {
@@ -52,12 +52,12 @@ public class DaoJdbcFactory extends DaoFactory {
     }
 
     @Override
-    public TemaDao getTemaDao() {
+    public ITemaDao getTemaDao() {
         return new TemaDaoJdbc();
     }
 
     @Override
-    public VotacionDao getVotacionDao() {
+    public IVotacionDao getVotacionDao() {
         throw new UnsupportedOperationException();
     }
 

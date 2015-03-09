@@ -8,10 +8,10 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import es.upm.miw.models.daos.TemaDao;
+import es.upm.miw.models.daos.ITemaDao;
 import es.upm.miw.models.entities.Tema;
 
-public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements TemaDao {
+public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements ITemaDao {
 
     private Logger log = LogManager.getLogger(TemaDaoJdbc.class);
 

@@ -2,7 +2,7 @@ package es.upm.miw.models.daos;
 
 import java.util.List;
 
-public interface GenericDao<T, ID> {
+public interface IGenericDao<T, ID> {
 
     void create(T entity);
 

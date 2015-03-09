@@ -11,9 +11,9 @@ import javax.persistence.criteria.Root;
 
 import org.apache.logging.log4j.LogManager;
 
-import es.upm.miw.models.daos.GenericDao;
+import es.upm.miw.models.daos.IGenericDao;
 
-public abstract class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
+public abstract class GenericDaoJpa<T, ID> implements IGenericDao<T, ID> {
     private static final String SQL_DELETE_ALL = "DELETE FROM %s";
     private Class<T> persistentClass;
 

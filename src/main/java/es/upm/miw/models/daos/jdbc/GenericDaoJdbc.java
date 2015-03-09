@@ -7,9 +7,9 @@ import java.sql.Statement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import es.upm.miw.models.daos.GenericDao;
+import es.upm.miw.models.daos.IGenericDao;
 
-public abstract class GenericDaoJdbc<T, ID> implements GenericDao<T, ID> {
+public abstract class GenericDaoJdbc<T, ID> implements IGenericDao<T, ID> {
 
     protected static final String SQL_SELECT_ID = "SELECT * FROM %s WHERE ID=%d";
 
