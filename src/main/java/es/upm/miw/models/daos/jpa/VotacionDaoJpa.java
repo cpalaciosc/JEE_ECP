@@ -34,25 +34,28 @@ public class VotacionDaoJpa extends GenericDaoJpa<Votacion, Integer> implements 
         return (List<Votacion>) query.getResultList();
     }
 
-    private static final String DELETE_VOTACION_BY_TEMA = "DELETE FROM Votacion v WHERE v.tema = :tema ";
+    private static final String DELETE_VOTACION_BY_TEMA = "DELETE FROM Votacion v WHERE v.tema = :tema";
 
     @Override
     public int deleteAllByTema(Tema tema) {
         EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         int deletedCount = -1;
-        try {
-            entityManager.getTransaction().begin();
-            deletedCount = entityManager.createQuery(DELETE_VOTACION_BY_TEMA).setParameter("tema", tema).executeUpdate();
-            entityManager.getTransaction().commit();
-            LogManager.getLogger(GenericDaoJpa.class).debug(" rows deleteByTema: " + deletedCount);
-        } catch (Exception e) {
-            LogManager.getLogger(GenericDaoJpa.class).error("delete: " + e);
-            if (entityManager.getTransaction().isActive())
-                entityManager.getTransaction().rollback();
-        } finally {
-            entityManager.close();
+        if (tema != null) {
+            try {
+                entityManager.getTransaction().begin();
+                deletedCount = entityManager.createQuery(DELETE_VOTACION_BY_TEMA)
+                        .setParameter("tema", tema).executeUpdate();
+                entityManager.getTransaction().commit();
+                LogManager.getLogger(GenericDaoJpa.class).debug(
+                        " rows deleteByTema: " + deletedCount);
+            } catch (Exception e) {
+                LogManager.getLogger(GenericDaoJpa.class).error("delete: " + e);
+                if (entityManager.getTransaction().isActive())
+                    entityManager.getTransaction().rollback();
+            } finally {
+                entityManager.close();
+            }
         }
-
         return deletedCount;
 
     }
@@ -62,4 +65,5 @@ public class VotacionDaoJpa extends GenericDaoJpa<Votacion, Integer> implements 
         // TODO Auto-generated method stub
         return 0;
     }
+
 }
