@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import es.upm.miw.models.utils.NivelEstudio;
 
@@ -27,7 +31,7 @@ public class Votacion {
     public static final String VALORACION = "valoracion";
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = ID)
     private Integer id;
 
@@ -36,9 +40,12 @@ public class Votacion {
 
     @ManyToOne
     @JoinColumn(name = TEMA, nullable = false)
+    @CascadeOnDelete
     private Tema tema;
 
     @Column(name = VALORACION, nullable = false)
+    @Max(value = 10)
+    @Min(value = 1)
     private Integer valoracion;
 
     @Enumerated(EnumType.STRING)
