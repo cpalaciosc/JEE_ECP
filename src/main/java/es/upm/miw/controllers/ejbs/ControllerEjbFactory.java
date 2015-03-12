@@ -11,30 +11,46 @@ import es.upm.miw.controllers.IVotarController;
 
 @ManagedBean(name = "controllerFactory")
 @SessionScoped
-public class ControllerEjbFactory extends ControllerFactory { 
+public class ControllerEjbFactory extends ControllerFactory {
+
+    private IEliminarTemaController eliminarTemaController;
+
+    private IIncorporarTemaController incorporarTemaController;
+
+    private IVerVotacionesController verVotacionesController;
+
+    private IVotarController votarController;
 
     @Override
     public IEliminarTemaController getEliminarTemaController() {
-        // TODO Auto-generated method stub
-        return null;
+        if (eliminarTemaController == null) {
+            eliminarTemaController = new EliminarTemaController();
+        }
+        return eliminarTemaController;
     }
 
     @Override
     public IIncorporarTemaController getIncorporarTemaController() {
-        // TODO Auto-generated method stub
-        return null;
+        if (incorporarTemaController == null) {
+            incorporarTemaController = new IncorporarTemaController();
+        }
+        return incorporarTemaController;
     }
 
     @Override
     public IVerVotacionesController getVerVotacionesController() {
-        // TODO Auto-generated method stub
-        return null;
+        if (verVotacionesController == null) {
+            verVotacionesController = new VerVotacionesController();
+        }
+        return verVotacionesController;
     }
 
     @Override
     public IVotarController getVotarController() {
-        // TODO Auto-generated method stub
-        return null;
+        if (votarController == null) {
+            votarController = new VotarController();
+        }
+        return votarController;
     }
 
 }
