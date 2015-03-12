@@ -3,6 +3,10 @@ package es.upm.miw.models.daos.jpa;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.junit.After;
 import org.junit.Before;
@@ -15,6 +19,7 @@ import es.upm.miw.models.daos.IVotacionDao;
 import es.upm.miw.models.entities.Tema;
 import es.upm.miw.models.entities.Votacion;
 import es.upm.miw.models.utils.NivelEstudio;
+import es.upm.miw.models.utils.ValoracionMedia;
 
 public class VotacionDaoJpaTest {
     private IVotacionDao votacionDao;
@@ -24,6 +29,8 @@ public class VotacionDaoJpaTest {
     private Votacion votacion;
 
     private Tema tema;
+
+    List<Votacion> votaciones;
 
     final static Class<VotacionDaoJpaTest> clazz = VotacionDaoJpaTest.class;
 
@@ -38,12 +45,11 @@ public class VotacionDaoJpaTest {
     public void before() {
         LogManager.getLogger(clazz).debug("Inicio de before()");
         temaDao = DaoFactory.getFactory().getTemaDao();
-        temaDao.deleteAll();
-        tema = new Tema("Tema1", "Pregunta1");
-        temaDao.create(tema);
-        votacion = new Votacion(1, "255.255.255.255", tema, 1, NivelEstudio.DOCTORADO);
         votacionDao = DaoFactory.getFactory().getVotacionDao();
-        votacionDao.create(votacion);
+        temaDao.deleteAll();
+        cleanTables();
+        initTema();
+        initVotacion();
         LogManager.getLogger(clazz).debug("Fin de before()");
     }
 
@@ -75,10 +81,28 @@ public class VotacionDaoJpaTest {
     @Test
     public void testFindAll() {
         LogManager.getLogger(clazz).debug("Inicio de testFindAll()");
-        votacionDao.create(new Votacion(2, "255.255.255.255", tema, 2, NivelEstudio.GRADO));
-        votacionDao.create(new Votacion(3, "255.255.255.255", tema, 3, NivelEstudio.PRIMARIA));
-        assertEquals(3, votacionDao.findAll().size());
+        initVotacionListDataSet();
+        assertEquals(this.votaciones.size(), votacionDao.findAll().size());
         LogManager.getLogger(clazz).debug("Fin de testFindAll()");
+    }
+
+    @Test
+    public void testPromedioByEstudio() {
+        LogManager.getLogger(clazz).debug("Inicio de testPromedioByEstudio()");
+        initVotacionListDataSet();
+        List<NivelEstudio> nivelEstudioList = Arrays.asList(NivelEstudio.values());
+        List<ValoracionMedia> listValoracionMedia = votacionDao.valoracionMediaByNivelEstudio(tema);
+        assertEquals(nivelEstudioList.size(), listValoracionMedia.size());
+        LogManager.getLogger(clazz).debug("Fin de testPromedioByEstudio()");
+    }
+
+    @Test
+    public void testNumeroVotosByTema() {
+        LogManager.getLogger(clazz).debug("Inicio de testNumeroVotosByTema()");
+        initVotacionListDataSet();
+
+        assertEquals(votacionDao.findAllByTema(tema).size(), votacionDao.numeroVotos(tema));
+        LogManager.getLogger(clazz).debug("Fin de testNumeroVotosByTema()");
     }
 
     @After
@@ -86,6 +110,38 @@ public class VotacionDaoJpaTest {
         LogManager.getLogger(clazz).debug("Limpiando tablas afectadas");
         votacionDao.deleteAll();
         temaDao.deleteAll();
+    }
+
+    private void cleanTables() {
+        votacionDao.deleteAll();
+        temaDao.deleteAll();
+    }
+
+    private void initTema() {
+        tema = new Tema("Tema1", "Pregunta1");
+        temaDao.create(tema);
+
+    }
+
+    private void initVotacion() {
+        votacion = new Votacion("255.255.255.255", tema, 1, NivelEstudio.DOCTORADO);
+        votacionDao.create(votacion);
+    }
+
+    private void initVotacionListDataSet() {
+        votaciones = new ArrayList<Votacion>();
+        votaciones.add(new Votacion("255.255.255.255", tema, 5, NivelEstudio.DOCTORADO));
+        votaciones.add(new Votacion("255.255.255.255", tema, 4, NivelEstudio.DOCTORADO));
+        votaciones.add(new Votacion("255.255.255.255", tema, 8, NivelEstudio.GRADO));
+        votaciones.add(new Votacion("255.255.255.255", tema, 3, NivelEstudio.GRADO));
+        votaciones.add(new Votacion("255.255.255.255", tema, 1, NivelEstudio.MASTER));
+        votaciones.add(new Votacion("255.255.255.255", tema, 6, NivelEstudio.MASTER));
+
+        for (Votacion tmp : votaciones) {
+            votacionDao.create(tmp);
+        }
+
+        votaciones.add(votacion);
     }
 
 }
