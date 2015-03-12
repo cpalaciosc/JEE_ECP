@@ -1,5 +1,6 @@
 package es.upm.miw.models.daos.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import es.upm.miw.models.daos.IVotacionDao;
 import es.upm.miw.models.entities.Tema;
 import es.upm.miw.models.entities.Votacion;
 import es.upm.miw.models.utils.NivelEstudio;
+import es.upm.miw.models.utils.ValoracionMedia;
 
 public class VotacionDaoJpa extends GenericDaoJpa<Votacion, Integer> implements IVotacionDao {
 
@@ -60,10 +62,23 @@ public class VotacionDaoJpa extends GenericDaoJpa<Votacion, Integer> implements 
 
     }
 
+    private static final String QUERY_PROMEDIO_POR_ESTUDIO = "SELECT AVG(v.valoracion), v.nivelEstudio " +
+                                                             "FROM Votacion v " +
+                                                             "WHERE v.tema = :tema " +
+                                                             "GROUP BY v.nivelEstudio";
+
+    @SuppressWarnings("unchecked")
     @Override
-    public double valoracionMediaByNivelEstudio(NivelEstudio nivelEstudio) {
-        // TODO Auto-generated method stub
-        return 0;
+    public List<ValoracionMedia> valoracionMediaByNivelEstudio(Tema tema) {
+        Query query = DaoJpaFactory.getEntityManagerFactory().createEntityManager()
+                .createQuery(QUERY_PROMEDIO_POR_ESTUDIO);
+        query.setParameter("tema", tema);
+        List<Object[]> result =  query.getResultList();
+        List<ValoracionMedia> listValoracionMedia = new ArrayList<ValoracionMedia>();
+        for(Object[] tmp : result){
+            listValoracionMedia.add(new ValoracionMedia((Double)tmp[0], (NivelEstudio)tmp[1]));
+        }
+        return listValoracionMedia;
     }
 
 }

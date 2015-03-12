@@ -4,7 +4,7 @@ import java.util.List;
 
 import es.upm.miw.models.entities.Tema;
 import es.upm.miw.models.entities.Votacion;
-import es.upm.miw.models.utils.NivelEstudio;
+import es.upm.miw.models.utils.ValoracionMedia;
 
 public interface IVotacionDao extends IGenericDao<Votacion, Integer> {
     
@@ -12,6 +12,6 @@ public interface IVotacionDao extends IGenericDao<Votacion, Integer> {
     
     public int deleteAllByTema(Tema tema);
     
-    public double valoracionMediaByNivelEstudio(NivelEstudio nivelEstudio);
+    public List<ValoracionMedia> valoracionMediaByNivelEstudio(Tema tema);
 
 }
