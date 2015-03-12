@@ -13,5 +13,7 @@ public interface IVotacionDao extends IGenericDao<Votacion, Integer> {
     public int deleteAllByTema(Tema tema);
     
     public List<ValoracionMedia> valoracionMediaByNivelEstudio(Tema tema);
+    
+    public int numeroVotos(Tema tema);
 
 }

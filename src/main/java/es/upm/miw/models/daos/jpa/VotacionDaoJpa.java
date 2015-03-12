@@ -1,6 +1,7 @@
 package es.upm.miw.models.daos.jpa;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -62,23 +63,34 @@ public class VotacionDaoJpa extends GenericDaoJpa<Votacion, Integer> implements 
 
     }
 
-    private static final String QUERY_PROMEDIO_POR_ESTUDIO = "SELECT AVG(v.valoracion), v.nivelEstudio " +
-                                                             "FROM Votacion v " +
-                                                             "WHERE v.tema = :tema " +
-                                                             "GROUP BY v.nivelEstudio";
+    private static final String QUERY_PROMEDIO_POR_ESTUDIO = "SELECT AVG(v.valoracion) "
+            + "FROM Votacion v WHERE v.tema = :tema AND v.nivelEstudio = :nivelEstudio ";
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<ValoracionMedia> valoracionMediaByNivelEstudio(Tema tema) {
         Query query = DaoJpaFactory.getEntityManagerFactory().createEntityManager()
                 .createQuery(QUERY_PROMEDIO_POR_ESTUDIO);
         query.setParameter("tema", tema);
-        List<Object[]> result =  query.getResultList();
+        List<NivelEstudio> nivelEstudioList = Arrays.asList(NivelEstudio.values());
         List<ValoracionMedia> listValoracionMedia = new ArrayList<ValoracionMedia>();
-        for(Object[] tmp : result){
-            listValoracionMedia.add(new ValoracionMedia((Double)tmp[0], (NivelEstudio)tmp[1]));
+        for (NivelEstudio tmp : nivelEstudioList) {
+            query.setParameter("nivelEstudio", tmp);
+            Object result = query.getSingleResult();
+            Double media = result != null ? (Double) result : 0.00;
+            listValoracionMedia.add(new ValoracionMedia(media, tmp));
         }
         return listValoracionMedia;
+    }
+
+    private static final String QUERY_NUMERO_VOTOS_POR_TEMA = "SELECT count(v.id) "
+            + "FROM Votacion v WHERE v.tema = :tema";
+
+    @Override
+    public int numeroVotos(Tema tema) {
+        Query query = DaoJpaFactory.getEntityManagerFactory().createEntityManager()
+                .createQuery(QUERY_NUMERO_VOTOS_POR_TEMA);
+        query.setParameter("tema", tema);
+        return ((Long)query.getSingleResult()).intValue();
     }
 
 }
