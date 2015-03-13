@@ -78,6 +78,11 @@ public class Dispatcher extends HttpServlet {
                 autorizarView.setControllerFactory(controllerFactory);
                 autorizarView.setCodigoSeguridad(request.getParameter("codigo"));
                 view = autorizarView.autorizar();
+                if(autorizarView.isAutorizado()){
+                    ListadoTemasView listadoTemasView = new ListadoTemasView();
+                    listadoTemasView.listarTemas();
+                    request.setAttribute("listadoTemasView", listadoTemasView);
+                }
                 request.setAttribute("errorMsg", autorizarView.getErrorMsg());
                 request.setAttribute("successMsg", autorizarView.getSuccessMsg());
                 break;
