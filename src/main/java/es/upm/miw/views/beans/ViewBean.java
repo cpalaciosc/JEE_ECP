@@ -11,6 +11,8 @@ public class ViewBean {
 
     private String errorMsg;
 
+    private String successMsg;
+
     public ViewBean() {
 
     }
@@ -25,6 +27,14 @@ public class ViewBean {
 
     protected ControllerFactory getControllerFactory() {
         return controllerFactory;
+    }
+
+    public String getSuccessMsg() {
+        return successMsg;
+    }
+
+    public void setSuccessMsg(String successMsg) {
+        this.successMsg = successMsg;
     }
 
     public String getErrorMsg() {
