@@ -8,11 +8,13 @@
 </head>
 <body>
     <h1>Home Proyecto JEE_ECP Versión JSP</h1>
+    <span style="color: red">${errorMsg}</span>
+    <span style="color: green">${sucessMsg}</span>
     <p>
-        <a href="/jsp/tema/crear">Incorporar Tema</a>
+        <a href="/Web/jsp/tema/nuevo">Incorporar Tema</a>
     </p>
     <p>
-        <a href="/jsp/tema/eliminar">Eliminar Tema</a>
+        <a href="/Web/jsp/tema/autorizar">Eliminar Tema</a>
     </p>
 </body>
 </html>
