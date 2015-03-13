@@ -12,7 +12,7 @@
     <c:set var="autorizarView" scope="request"
         value="${autorizarView}" />
     <span style="color: red">${errorMsg}</span>
-    <form action="/Web/jsp/tema/verificar_codigo_seguridad" method="post">
+    <form action="/Web/jsp/tema/listar" method="post">
         <p>
             Ingrese código de seguridad: <input name="codigo" type="text"
                 value="${autorizarView.codigoSeguridad}" required />
