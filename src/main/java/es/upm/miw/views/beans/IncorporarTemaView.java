@@ -22,12 +22,12 @@ public class IncorporarTemaView extends TemasBean {
         boolean isCreated = incorporarTemaController.incorporarTema(this.tema);
         String next = null;
         if(isCreated){
-            this.setErrorMsg(INCORPORACION_OK);
+            this.setSuccessMsg(INCORPORACION_OK);
             next = "home";
         }
         else{
             this.setErrorMsg(INCORPORACION_FAIL);
-            next = "tema/IncorporarTema";
+            next = "tema/incorporar";
         }
 
         LogManager.getLogger(clazz).debug("Creación de tema " + tema + " resultado " + isCreated + " Proxima vista "+next);
