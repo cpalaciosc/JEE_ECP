@@ -73,13 +73,14 @@ public class Dispatcher extends HttpServlet {
                 request.setAttribute("errorMsg", incorporarTemaView.getErrorMsg());
                 request.setAttribute("successMsg", incorporarTemaView.getSuccessMsg());
                 break;
-            case "tema/verificar_codigo_seguridad":
+            case "tema/listar":
                 AutorizarView autorizarView = new AutorizarView();
                 autorizarView.setControllerFactory(controllerFactory);
                 autorizarView.setCodigoSeguridad(request.getParameter("codigo"));
                 view = autorizarView.autorizar();
                 if(autorizarView.isAutorizado()){
                     ListadoTemasView listadoTemasView = new ListadoTemasView();
+                    listadoTemasView.setControllerFactory(controllerFactory);
                     listadoTemasView.listarTemas();
                     request.setAttribute("listadoTemasView", listadoTemasView);
                 }
