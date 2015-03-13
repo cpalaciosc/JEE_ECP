@@ -5,7 +5,6 @@ public class EliminarTemaView extends TemasBean {
     private final static Class<EliminarTemaView> clazz = EliminarTemaView.class;
 
     public EliminarTemaView() {
-        super();
     }
     
     public String eliminarTema(){
