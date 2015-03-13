@@ -10,6 +10,8 @@ public class AutorizarView extends ViewBean {
 
     private String codigoSeguridad;
 
+    private boolean autorizado = false;
+
     public AutorizarView() {
 
     }
@@ -22,6 +24,10 @@ public class AutorizarView extends ViewBean {
         this.codigoSeguridad = codigoSeguridad;
     }
 
+    public boolean isAutorizado() {
+        return autorizado;
+    }
+
     public String autorizar() {
         IEliminarTemaController eliminarTemaController = this.getControllerFactory()
                 .getEliminarTemaController();
@@ -30,6 +36,7 @@ public class AutorizarView extends ViewBean {
         if (eliminarTemaController.autorizar(this.codigoSeguridad)) {
             this.setSuccessMsg(AUTORIZACION_OK);
             next = "tema/consultar";
+            autorizado = true;
         } else {
             this.setErrorMsg(AUTORIZACION_FAIL);
             next = "tema/autorizar";
