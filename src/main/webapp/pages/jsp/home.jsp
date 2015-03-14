@@ -17,5 +17,8 @@
     <p>
         <a href="/Web/jsp/tema/autorizar">Eliminar Tema</a>
     </p>
+    <p>
+        <a href="/Web/jsp/votaciones/nuevo">Votar</a>
+    </p>    
 </body>
 </html>
