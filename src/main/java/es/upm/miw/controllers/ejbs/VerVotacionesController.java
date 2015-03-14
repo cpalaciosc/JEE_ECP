@@ -19,13 +19,16 @@ public class VerVotacionesController extends ControllerEjb implements IVerVotaci
         ITemaDao temaDao = DaoFactory.getFactory().getTemaDao();
         List<Tema> listTemas = temaDao.findAll();
         List<TemaValoracionMedia> listTemaValoracionMedias = new ArrayList<TemaValoracionMedia>();
-        for(Tema tmpTema : listTemas){
-            List<ValoracionMedia> valoracionMedia = votacionDao.valoracionMediaByNivelEstudio(tmpTema);
+        for (Tema tmpTema : listTemas) {
+            List<ValoracionMedia> valoracionMedia = votacionDao
+                    .valoracionMediaByNivelEstudio(tmpTema);
+            int numeroVotos = votacionDao.numeroVotos(tmpTema);
             TemaValoracionMedia tmp = new TemaValoracionMedia();
             tmp.setTema(tmpTema);
             tmp.setValoracionMedia(valoracionMedia);
+            tmp.setNumeroVotos(numeroVotos);
             listTemaValoracionMedias.add(tmp);
-        }  
+        }
         return listTemaValoracionMedias;
     }
 }
