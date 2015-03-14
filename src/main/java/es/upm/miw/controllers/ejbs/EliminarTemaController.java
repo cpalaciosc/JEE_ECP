@@ -15,10 +15,7 @@ public class EliminarTemaController extends ControllerEjb implements IEliminarTe
 
     @Override
     public List<Tema> consultarTemas() {
-        ITemaDao temaDao = DaoFactory.getFactory().getTemaDao();
-        List<Tema> result = temaDao.findAll();
-        LogManager.getLogger(clazz).debug("Consultando los temas " + result.size());
-        return result;
+        return super.consultarTemas();
     }
 
     @Override
@@ -26,7 +23,7 @@ public class EliminarTemaController extends ControllerEjb implements IEliminarTe
         ITemaDao temaDao = DaoFactory.getFactory().getTemaDao();
         LogManager.getLogger(clazz).debug("Eliminando tema con id " + idTema);
         temaDao.deleteById(idTema);
-        return temaDao.read(idTema)!=null? true: false;
+        return temaDao.read(idTema)==null? true: false;
     }
 
     public static final String CODIGO_SEGURIDAD = "666";
