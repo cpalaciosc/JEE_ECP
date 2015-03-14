@@ -16,11 +16,10 @@ public class ListadoTemasView extends ViewBean {
         return temasList;
     }
 
-    public String listarTemas() {
+    public void listarTemas() {
         IEliminarTemaController eliminarTemaController = this.getControllerFactory()
                 .getEliminarTemaController();
         this.temasList = eliminarTemaController.consultarTemas();
-        return null;
     }
 
 }
