@@ -10,6 +10,6 @@ public interface IEliminarTemaController {
 
     public List<Tema> consultarTemas();
 
-    public boolean eliminarTema();
+    public boolean eliminarTema(int idTema);
 
 }
