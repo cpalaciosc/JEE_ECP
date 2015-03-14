@@ -4,7 +4,7 @@ public class ValoracionMedia {
 
     private NivelEstudio nivelEstudio;
 
-    private double valoracionMedia;
+    private double valor;
 
     public ValoracionMedia() {
 
@@ -12,7 +12,7 @@ public class ValoracionMedia {
 
     public ValoracionMedia(double valoracionMedia, NivelEstudio nivelEstudio) {
         this.nivelEstudio = nivelEstudio;
-        this.valoracionMedia = valoracionMedia;
+        this.valor = valoracionMedia;
     }
 
     public NivelEstudio getNivelEstudio() {
@@ -23,18 +23,18 @@ public class ValoracionMedia {
         this.nivelEstudio = nivelEstudio;
     }
 
-    public double getValoracionMedia() {
-        return valoracionMedia;
+    public double getValor() {
+        return valor;
     }
 
-    public void setValoracionMedia(double valoracionMedia) {
-        this.valoracionMedia = valoracionMedia;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     @Override
     public String toString() {
-        return "ValoracionMedia [nivelEstudio=" + nivelEstudio + ", valoracionMedia="
-                + valoracionMedia + "]";
+        return "ValoracionMedia [nivelEstudio=" + nivelEstudio + ", valor="
+                + valor + "]";
     }
 
 }
