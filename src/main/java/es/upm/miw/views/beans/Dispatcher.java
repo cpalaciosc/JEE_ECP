@@ -52,13 +52,15 @@ public class Dispatcher extends HttpServlet {
                 request.setAttribute("errorMsg", eliminarTemaView.getErrorMsg());
                 request.setAttribute("successMsg", eliminarTemaView.getSuccessMsg());
                 break;
-            case "votaciones/nuevo":
-                view = "votaciones/votar";
-                VotarView votarView = new VotarView();
-                request.setAttribute("votarView", votarView);
-                break; 
+            case "votacion/seleccionTema":
+                view = "votacion/seleccionTema";
+                SeleccionarTemaView seleccionarTemaView = new SeleccionarTemaView();
+                seleccionarTemaView.setControllerFactory(controllerFactory);
+                seleccionarTemaView.listarTemas();
+                request.setAttribute("seleccionarTemaView", seleccionarTemaView);
+                break;
             default:
-                LogManager.getLogger(clazz).debug("Vista solicitada invalida " + view );
+                LogManager.getLogger(clazz).debug("Vista solicitada invalida " + view);
                 break;
             }
 
@@ -102,6 +104,14 @@ public class Dispatcher extends HttpServlet {
                 }
                 request.setAttribute("errorMsg", autorizarView.getErrorMsg());
                 request.setAttribute("successMsg", autorizarView.getSuccessMsg());
+                break;
+            case "votacion/votar":
+                VotarView votarView = new VotarView();
+                votarView.setIdTema(Integer.parseInt(request.getParameter("temas")));
+                votarView.setControllerFactory(controllerFactory);
+                votarView.prepararVotacion();
+                request.setAttribute("votarView", votarView);
+                view = "votacion/votar";
                 break;
 
             }
