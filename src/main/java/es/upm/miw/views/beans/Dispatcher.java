@@ -25,8 +25,6 @@ public class Dispatcher extends HttpServlet {
     @Override
     public void init() throws ServletException {
         controllerFactory = new ControllerEjbFactory();
-        // getServletContext().setAttribute("controllerFactory",
-        // controllerFactory);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -54,8 +52,16 @@ public class Dispatcher extends HttpServlet {
                 request.setAttribute("errorMsg", eliminarTemaView.getErrorMsg());
                 request.setAttribute("successMsg", eliminarTemaView.getSuccessMsg());
                 break;
-            }            
-            
+            case "votaciones/nuevo":
+                view = "votaciones/votar";
+                VotarView votarView = new VotarView();
+                request.setAttribute("votarView", votarView);
+                break; 
+            default:
+                LogManager.getLogger(clazz).debug("Vista solicitada invalida " + view );
+                break;
+            }
+
         }
         LogManager.getLogger(clazz).debug("Redirigiendo a vista " + view + ".jsp");
         this.getServletContext().getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
@@ -77,7 +83,9 @@ public class Dispatcher extends HttpServlet {
                 incorporarTemaView.setControllerFactory(controllerFactory);
                 LogManager.getLogger(clazz).debug("Tema a guardar " + incorporarTemaView.getTema());
                 view = incorporarTemaView.incorporarTema();
-                request.setAttribute("incorporarTemaView", incorporarTemaView);
+                if (!incorporarTemaView.isCreated()) {
+                    request.setAttribute("incorporarTemaView", incorporarTemaView);
+                }
                 request.setAttribute("errorMsg", incorporarTemaView.getErrorMsg());
                 request.setAttribute("successMsg", incorporarTemaView.getSuccessMsg());
                 break;
@@ -86,7 +94,7 @@ public class Dispatcher extends HttpServlet {
                 autorizarView.setControllerFactory(controllerFactory);
                 autorizarView.setCodigoSeguridad(request.getParameter("codigo"));
                 view = autorizarView.autorizar();
-                if(autorizarView.isAutorizado()){
+                if (autorizarView.isAutorizado()) {
                     ListadoTemasView listadoTemasView = new ListadoTemasView();
                     listadoTemasView.setControllerFactory(controllerFactory);
                     listadoTemasView.listarTemas();
