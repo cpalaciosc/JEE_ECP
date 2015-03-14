@@ -22,9 +22,11 @@ public class EliminarTemaController extends ControllerEjb implements IEliminarTe
     }
 
     @Override
-    public boolean eliminarTema() {
-
-        return false;
+    public boolean eliminarTema(int idTema) {
+        ITemaDao temaDao = DaoFactory.getFactory().getTemaDao();
+        LogManager.getLogger(clazz).debug("Eliminando tema con id " + idTema);
+        temaDao.deleteById(idTema);
+        return temaDao.read(idTema)!=null? true: false;
     }
 
     public static final String CODIGO_SEGURIDAD = "666";
