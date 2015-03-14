@@ -19,7 +19,7 @@ public class SeleccionarTemaView extends ViewBean {
     public String listarTemas() {
         IVotarController votarController = this.getControllerFactory().getVotarController();
         listTemas = votarController.consultarTemas();
-        return null;
+        return "votacion/seleccionTema";
     }
 
 }
