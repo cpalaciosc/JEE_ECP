@@ -8,6 +8,8 @@ public class TemaValoracionMedia {
 
     private Tema tema;
 
+    private int numeroVotos;
+
     private List<ValoracionMedia> valoracionMedia;
 
     public TemaValoracionMedia() {
@@ -28,6 +30,14 @@ public class TemaValoracionMedia {
 
     public void setValoracionMedia(List<ValoracionMedia> valoracionMedia) {
         this.valoracionMedia = valoracionMedia;
+    }
+
+    public int getNumeroVotos() {
+        return numeroVotos;
+    }
+
+    public void setNumeroVotos(int numeroVotos) {
+        this.numeroVotos = numeroVotos;
     }
 
 }
