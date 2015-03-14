@@ -46,8 +46,16 @@ public class Dispatcher extends HttpServlet {
                 AutorizarView autorizarView = new AutorizarView();
                 request.setAttribute("autorizarView", autorizarView);
                 break;
-
-            }
+            case "tema/eliminar":
+                EliminarTemaView eliminarTemaView = new EliminarTemaView();
+                eliminarTemaView.setControllerFactory(controllerFactory);
+                eliminarTemaView.setIdTema(Integer.parseInt(request.getParameter("idTema")));
+                view = eliminarTemaView.eliminarTema();
+                request.setAttribute("errorMsg", eliminarTemaView.getErrorMsg());
+                request.setAttribute("successMsg", eliminarTemaView.getSuccessMsg());
+                break;
+            }            
+            
         }
         LogManager.getLogger(clazz).debug("Redirigiendo a vista " + view + ".jsp");
         this.getServletContext().getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
