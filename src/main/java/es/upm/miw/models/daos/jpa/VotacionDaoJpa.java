@@ -1,7 +1,6 @@
 package es.upm.miw.models.daos.jpa;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,6 +12,7 @@ import es.upm.miw.models.daos.IVotacionDao;
 import es.upm.miw.models.entities.Tema;
 import es.upm.miw.models.entities.Votacion;
 import es.upm.miw.models.utils.NivelEstudio;
+import es.upm.miw.models.utils.Utils;
 import es.upm.miw.models.utils.ValoracionMedia;
 
 public class VotacionDaoJpa extends GenericDaoJpa<Votacion, Integer> implements IVotacionDao {
@@ -71,7 +71,7 @@ public class VotacionDaoJpa extends GenericDaoJpa<Votacion, Integer> implements 
         Query query = DaoJpaFactory.getEntityManagerFactory().createEntityManager()
                 .createQuery(QUERY_PROMEDIO_POR_ESTUDIO);
         query.setParameter("tema", tema);
-        List<NivelEstudio> nivelEstudioList = Arrays.asList(NivelEstudio.values());
+        List<NivelEstudio> nivelEstudioList = Utils.getNivelEstudioList();
         List<ValoracionMedia> listValoracionMedia = new ArrayList<ValoracionMedia>();
         for (NivelEstudio tmp : nivelEstudioList) {
             query.setParameter("nivelEstudio", tmp);
