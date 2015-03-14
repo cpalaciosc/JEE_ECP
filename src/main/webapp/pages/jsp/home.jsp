@@ -21,6 +21,9 @@
         <a href="/Web/jsp/votacion/seleccionTema">Votar</a>
     </p> 
     <p>
+        <a href="/Web/jsp/votacion/ver">Ver votaciones</a>
+    </p>     
+    <p>
         <a href="/Web/index.html">Volver al inicio</a>
     </p>       
 </body>
