@@ -16,24 +16,30 @@ public class IncorporarTemaView extends TemasBean {
 
     private static final String INCORPORACION_FAIL = "No se ha podido registrar el tema.";
 
+    private boolean isCreated = false;
+
     public String incorporarTema() {
         IIncorporarTemaController incorporarTemaController = this.getControllerFactory()
                 .getIncorporarTemaController();
-        boolean isCreated = incorporarTemaController.incorporarTema(this.tema);
+        isCreated = incorporarTemaController.incorporarTema(this.tema);
         String next = null;
-        if(isCreated){
+        if (isCreated) {
             this.setSuccessMsg(INCORPORACION_OK);
             next = "home";
-        }
-        else{
+        } else {
             this.setErrorMsg(INCORPORACION_FAIL);
             next = "tema/incorporar";
         }
 
-        LogManager.getLogger(clazz).debug("Creación de tema " + tema + " resultado " + isCreated + " Proxima vista "+next);
+        LogManager.getLogger(clazz).debug(
+                "Creación de tema " + tema + " resultado " + isCreated + " Proxima vista " + next);
 
         return next;
 
+    }
+
+    public boolean isCreated() {
+        return isCreated;
     }
 
 }
