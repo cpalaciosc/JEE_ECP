@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 
 import es.upm.miw.controllers.ejbs.ControllerEjbFactory;
+import es.upm.miw.models.utils.NivelEstudio;
+import es.upm.miw.models.utils.Utils;
 
 @WebServlet("/jsp/*")
 public class Dispatcher extends HttpServlet {
@@ -53,10 +55,9 @@ public class Dispatcher extends HttpServlet {
                 request.setAttribute("successMsg", eliminarTemaView.getSuccessMsg());
                 break;
             case "votacion/seleccionTema":
-                view = "votacion/seleccionTema";
                 SeleccionarTemaView seleccionarTemaView = new SeleccionarTemaView();
                 seleccionarTemaView.setControllerFactory(controllerFactory);
-                seleccionarTemaView.listarTemas();
+                view = seleccionarTemaView.listarTemas();
                 request.setAttribute("seleccionarTemaView", seleccionarTemaView);
                 break;
             default:
@@ -109,9 +110,30 @@ public class Dispatcher extends HttpServlet {
                 VotarView votarView = new VotarView();
                 votarView.setIdTema(Integer.parseInt(request.getParameter("temas")));
                 votarView.setControllerFactory(controllerFactory);
-                votarView.prepararVotacion();
+                view = votarView.prepararVotacion();
                 request.setAttribute("votarView", votarView);
-                view = "votacion/votar";
+                break;
+            case "votacion/procesar":
+                VotarView votarViewProcesar = new VotarView();
+                votarViewProcesar.setIdTema(Integer.parseInt(request.getParameter("idTema")));
+                votarViewProcesar.setControllerFactory(controllerFactory);
+                votarViewProcesar.getVotacion().setIp(Utils.getClientIpAddr(request));
+                votarViewProcesar.getVotacion().setNivelEstudio(
+                        NivelEstudio.valueOf(request.getParameter("nivelEstudio")));
+                votarViewProcesar.getVotacion().setValoracion(
+                        Integer.parseInt(request.getParameter("valoracion")));
+                view = votarViewProcesar.procesar();
+                if (!votarViewProcesar.isCreated()) {
+                    request.setAttribute("votarView", votarViewProcesar);
+                } else {
+                    SeleccionarTemaView seleccionarTemaView = new SeleccionarTemaView();
+                    seleccionarTemaView.setControllerFactory(controllerFactory);
+                    seleccionarTemaView.listarTemas();
+                    request.setAttribute("seleccionarTemaView", seleccionarTemaView);
+                }
+                request.setAttribute("errorMsg", votarViewProcesar.getErrorMsg());
+                request.setAttribute("successMsg", votarViewProcesar.getSuccessMsg());
+
                 break;
 
             }
