@@ -60,8 +60,15 @@ public class Dispatcher extends HttpServlet {
                 view = seleccionarTemaView.listarTemas();
                 request.setAttribute("seleccionarTemaView", seleccionarTemaView);
                 break;
+            case "votacion/ver":
+                VerVotacionesView verVotacionesView = new VerVotacionesView();
+                verVotacionesView.setControllerFactory(controllerFactory);
+                view = verVotacionesView.generarReporte();
+                request.setAttribute("verVotacionesView", verVotacionesView);
+                break;
             default:
-                LogManager.getLogger(clazz).debug("Vista solicitada invalida " + view);
+                LogManager.getLogger(clazz).debug(
+                        "Vista solicitada no reconocida, se redirigirá al home " + view);
                 break;
             }
 
@@ -128,7 +135,7 @@ public class Dispatcher extends HttpServlet {
                 } else {
                     SeleccionarTemaView seleccionarTemaView = new SeleccionarTemaView();
                     seleccionarTemaView.setControllerFactory(controllerFactory);
-                    seleccionarTemaView.listarTemas();
+                    view = seleccionarTemaView.listarTemas();
                     request.setAttribute("seleccionarTemaView", seleccionarTemaView);
                 }
                 request.setAttribute("errorMsg", votarViewProcesar.getErrorMsg());
