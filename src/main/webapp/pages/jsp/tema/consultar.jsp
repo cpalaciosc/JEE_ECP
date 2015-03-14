@@ -8,7 +8,7 @@
 <title>Listado de Temas</title>
 </head>
 <body>
-    <h1>Listado de tema</h1>
+    <h1>Listado de temas</h1>
     <c:set var="listadoTemasView" scope="request"
         value="${listadoTemasView}" />
     <span style="color: red">${errorMsg}</span>
@@ -17,7 +17,7 @@
          <span style="color: red">No existen temas disponibles</span>
         </c:when>
         <c:otherwise>
-		    <table>
+		    <table border="2">
 		    <tr>
 		        <th>Id</th>
 		        <th>Categoría</th>
