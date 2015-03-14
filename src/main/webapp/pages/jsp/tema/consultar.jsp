@@ -29,7 +29,7 @@
 		            <td>${tema.id}</td>
 		            <td>${tema.categoria}</td>
 		            <td>${tema.pregunta}</td>
-		            <td><a href="/Web/jsp/tema/eliminar">Eliminar</a></td>
+		            <td><a href="/Web/jsp/tema/eliminar?idTema=${tema.id}">Eliminar</a></td>
 		        </tr>
 		    </c:forEach>    
 		    </table>        
