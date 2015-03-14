@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<ui:composition template="../template/commonLayout.xhtml">
+		<ui:define name="content">
+			<p:breadCrumb>
+				<p:menuitem value="#{msgs.inicio}" url="/pages/jsf/home.xhtml" />
+				<p:menuitem value="#{msgs.incorporar_tema}" url="/pages/jsf/tema/incorporar.xhtml" />
+			</p:breadCrumb>
+			<h2>Incorporar nuevo tema</h2>
+			<h:form>
+				<h:panelGrid id="grid" columns="3" cellpadding="5">
+					<p:outputLabel for="categoria" value="#{msgs.categoria}: " />
+					<p:inputText id="categoria"
+						value="#{incorporarTemaView.tema.categoria}" required="true"
+						requiredMessage="#{msgs.requerido}" />
+					<p:message for="categoria" display="icon" />
+
+					<p:outputLabel for="pregunta" value="#{msgs.pregunta}: " />
+					<p:inputText id="pregunta"
+						value="#{incorporarTemaView.tema.pregunta}" required="true" />
+					<p:message for="pregunta" display="icon" />
+				</h:panelGrid>
+				<p:commandButton value="Guardar"
+					action="#{incorporarTemaView.incorporarTema}" icon="ui-icon-disk"
+					update="grid" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>
