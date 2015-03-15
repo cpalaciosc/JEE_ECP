@@ -14,6 +14,7 @@
 				<p:menuitem value="#{msgs.incorporar_tema}" url="/pages/jsf/tema/incorporar.xhtml" />
 			</p:breadCrumb>
 			<h2>Incorporar nuevo tema</h2>
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			<h:form>
 				<h:panelGrid id="grid" columns="3" cellpadding="5">
 					<p:outputLabel for="categoria" value="#{msgs.categoria}: " />
