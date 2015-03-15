@@ -14,7 +14,7 @@
 				<p:menuitem value="#{msgs.incorporar_tema}"
 					url="/pages/jsf/tema/incorporar.xhtml" />
 			</p:breadCrumb>
-			<h2>Incorporar nuevo tema</h2>
+			<h2>#{msgs.incorporar_tema}</h2>
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" />
 			<h:form>
@@ -30,7 +30,7 @@
 						value="#{incorporarTemaView.tema.pregunta}" required="true" />
 					<p:message for="pregunta" display="icon" />
 				</h:panelGrid>
-				<p:commandButton value="Guardar"
+				<p:commandButton value="#{msgs.guardar}"
 					action="#{incorporarTemaView.incorporarTema}" icon="ui-icon-disk"
 					update="grid" />
 			</h:form>
