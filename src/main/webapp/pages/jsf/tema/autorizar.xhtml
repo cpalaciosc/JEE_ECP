@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<ui:composition template="../template/commonLayout.xhtml">
+		<ui:define name="content">
+			<p:breadCrumb>
+				<p:menuitem value="#{msgs.inicio}" url="/pages/jsf/home.xhtml" />
+				<p:menuitem value="#{msgs.autorizar_eliminar_tema}"
+					url="/pages/jsf/tema/autorizar.xhtml" />
+			</p:breadCrumb>
+			<h2>#{msgs.autorizar_eliminar_tema}</h2>
+			<h:form>
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					closable="true" />
+				<p:outputLabel for="codigo" value="#{msgs.ingrese_codigo}: " />
+				<p:inputText id="codigo" value="#{autorizarView.codigoSeguridad}"
+					required="true" requiredMessage="#{msgs.requerido}" />
+				<p:message for="codigo" display="icon" />
+
+				<p:commandButton id="btn_autorizar" process="@form"
+					update="messages" actionListener="#{autorizarView.verificar}"
+					action="#{autorizarView.autorizar}"
+					value="#{msgs.enviar}" icon="ui-icon-refresh" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>
