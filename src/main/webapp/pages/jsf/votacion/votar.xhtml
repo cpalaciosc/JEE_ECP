@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<ui:composition template="../template/commonLayout.xhtml">
+		<ui:define name="content">
+			<p:breadCrumb>
+				<p:menuitem value="#{msgs.inicio}" url="/pages/jsf/home.xhtml" />
+				<p:menuitem value="#{msgs.realizar_votacion}"
+					url="/pages/jsf/votacion/votar.xhtml" />
+			</p:breadCrumb>
+			<h2>#{msgs.realizar_votacion}</h2>
+			<h:form>
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					closable="true" />
+				<h:panelGrid id="grid" columns="2" cellpadding="5">
+					<h:outputText value="#{msgs.categoria}: " />
+					<p:selectOneMenu id="categoria" value="#{votarView.selectedIdTema}">
+						<p:ajax listener="#{votarView.onCategoriaChange}"
+							update="votacion" />
+						<f:selectItem itemLabel="#{msgs.seleccion_categoria}"
+							itemValue="-1" noSelectionOption="true" />
+						<f:selectItems value="#{votarView.listTemas}" var="tema"
+							itemValue="#{tema.id}" itemLabel="#{tema.categoria}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+
+				<p:outputPanel id="votacion">
+					<h:panelGroup rendered="#{votarView.showFields}">
+						<h:outputText value="Pregunta: #{votarView.tema.pregunta}" />
+						<h:panelGrid id="grid1" columns="2" cellpadding="5">
+							<h:outputText value="#{msgs.valoracion}" />
+							<p:rating value="#{votarView.votacion.valoracion}" stars="10"
+								required="true" requiredMessage="#{msgs.requerido}" />
+
+							<h:outputText value="#{msgs.nivel_estudios}" />
+							<p:selectOneMenu value="#{votarView.selectedNivelEstudio}">
+								<f:selectItem itemLabel="#{msgs.seleccion_nivel_estudios}"
+									itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{votarView.nivelEstudioList}"
+									var="nivelEstudio" itemValue="#{nivelEstudio}"
+									itemLabel="#{nivelEstudio}" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+						<p:commandButton value="#{msgs.guardar}"
+							action="#{votarView.procesar}" icon="ui-icon-disk" update="grid1" />
+					</h:panelGroup>
+				</p:outputPanel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>
