@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<ui:composition template="../template/commonLayout.xhtml">
+		<ui:define name="content">
+			<p:breadCrumb>
+				<p:menuitem value="#{msgs.inicio}" url="/pages/jsf/home.xhtml" />
+				<p:menuitem value="#{msgs.autorizar_eliminar_tema}"
+					url="/pages/jsf/tema/autorizar.xhtml" />
+				<p:menuitem value="#{msgs.listado_temas}"
+					url="/pages/jsf/tema/consultar.xhtml" />
+			</p:breadCrumb>
+			<h2>#{msgs.listado_temas}</h2>
+			<h:form>
+				<p:dataTable var="tema" value="#{listadoTemasView.temasList}">
+					<p:column headerText="#{msgs.id}">
+						<h:outputText value="#{tema.id}" />
+					</p:column>
+
+					<p:column headerText="#{msgs.categoria}">
+						<h:outputText value="#{tema.categoria}" />
+					</p:column>
+
+					<p:column headerText="#{msgs.pregunta}">
+						<h:outputText value="#{tema.pregunta}" />
+					</p:column>
+
+					<p:column headerText="#{msgs.accion}">
+						<p:commandLink id="btn_eliminar#{tema.id}"
+							actionListener="#{eliminarTemaView.eliminarTema}"
+							action="#{eliminarTemaView.verificar}" 
+							ajax="false">
+							<f:param name="idTema" value="#{tema.id}"/>
+							<h:outputText value="#{msgs.eliminar}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>
