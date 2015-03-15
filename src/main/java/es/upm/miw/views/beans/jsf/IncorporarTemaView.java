@@ -46,7 +46,6 @@ public class IncorporarTemaView extends ViewBean {
                 "Creación de tema " + tema + " resultado " + isCreated + " Proxima vista " + next);
 
         return next;
-
     }
 
 }
