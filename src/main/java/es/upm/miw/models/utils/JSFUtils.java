@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 public class JSFUtils {
 
@@ -25,8 +26,15 @@ public class JSFUtils {
     }
 
     public static String getRequestParameter(String parameterName) {
-        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext()
+                .getRequestParameterMap();
         return params.get(parameterName);
+    }
+
+    public static String getClientIpAddr() {
+        return Utils.getClientIpAddr((HttpServletRequest) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequest());
+
     }
 
 }
