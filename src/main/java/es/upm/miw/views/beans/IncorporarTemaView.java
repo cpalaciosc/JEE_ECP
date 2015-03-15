@@ -1,12 +1,9 @@
 package es.upm.miw.views.beans;
 
-import javax.faces.bean.ManagedBean;
-
 import org.apache.logging.log4j.LogManager;
 
 import es.upm.miw.controllers.IIncorporarTemaController;
 
-@ManagedBean
 public class IncorporarTemaView extends TemasBean {
 
     private final static Class<IncorporarTemaView> clazz = IncorporarTemaView.class;
