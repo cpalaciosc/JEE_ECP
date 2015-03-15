@@ -1,12 +1,9 @@
 package es.upm.miw.views.beans;
 
-import javax.faces.bean.ManagedProperty;
-
 import es.upm.miw.controllers.ControllerFactory;
 
 public class ViewBean {
 
-    @ManagedProperty(value = "#{controllerFactory}")
     private ControllerFactory controllerFactory;
 
     private String errorMsg;
