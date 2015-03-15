@@ -25,7 +25,7 @@ public class AutorizarView extends ViewBean {
         this.codigoSeguridad = codigoSeguridad;
     }
     
-    public String autorizar(){
+    public String verificar(){
         String next = null;
         if(this.autorizado){
             next = "tema/consultar";
@@ -33,7 +33,7 @@ public class AutorizarView extends ViewBean {
         return next;
     }
 
-    public void verificar() {
+    public void autorizar() {
         IEliminarTemaController eliminarTemaController = this.getControllerFactory()
                 .getEliminarTemaController();
 
