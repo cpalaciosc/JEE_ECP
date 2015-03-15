@@ -13,4 +13,17 @@
 			<var>msgs</var>
 		</resource-bundle>
 	</application>
+	<navigation-rule>
+		<from-view-id>/pages/jsf/tema/incorporar.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{incorporarTemaView.incorporarTema}</from-action>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/pages/jsf/home.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<lifecycle>
+		<phase-listener>es.upm.miw.views.beans.jsf.MultiPageMessagesSupport</phase-listener>
+	</lifecycle>
+
 </faces-config>
