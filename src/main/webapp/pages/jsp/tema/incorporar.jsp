@@ -11,7 +11,9 @@
 	<h1>Incorporar tema</h1>
 	<c:set var="incorporarTemaView" scope="request"
 		value="${incorporarTemaView}" />
-	<span style="color: red">${errorMsg}</span>
+	<p>
+		<span style="color: red">${errorMsg}</span>
+	</p>
 	<form action="/Web/jsp/tema/crear" method="post">
 		<p>
 			Categoría: <input name="categoria" type="text"

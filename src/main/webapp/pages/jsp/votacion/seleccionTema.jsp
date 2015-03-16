@@ -11,8 +11,9 @@
 	<h1>Seleccione el tema a votar</h1>
 	<c:set var="seleccionarTemaView" scope="request"
 		value="${seleccionarTemaView}" />
-	<span style="color: red">${errorMsg}</span>
-	<span style="color: green">${successMsg}</span>
+	<p>
+		<span style="color: red">${errorMsg}</span> <span style="color: green">${successMsg}</span>
+	</p>
 	<form action="/Web/jsp/votacion/votar" method="post">
 		<p>
 			<span style="font-weight: bold">Tema: </span> <select name="temas">

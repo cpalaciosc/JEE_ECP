@@ -11,7 +11,9 @@
 	<h1>Valorarion media por tema</h1>
 	<c:set var="verVotacionesView" scope="request"
 		value="${verVotacionesView}" />
-	<span style="color: red">${errorMsg}</span>
+	<p>
+		<span style="color: red">${errorMsg}</span>
+	</p>
 	<c:choose>
 		<c:when test="${empty verVotacionesView.temaValoracionMediaList}">
 			<span style="color: red">No existen temas disponibles</span>
@@ -19,7 +21,8 @@
 		<c:otherwise>
 			<c:forEach var="temaValoracionMedia"
 				items="${verVotacionesView.temaValoracionMediaList}">
-				<h3>${temaValoracionMedia.tema.categoria} - ${temaValoracionMedia.numeroVotos} votos</h3>
+				<h3>${temaValoracionMedia.tema.categoria}-
+					${temaValoracionMedia.numeroVotos} votos</h3>
 				<table border="2">
 					<tr>
 						<th>Nivel de estudio</th>

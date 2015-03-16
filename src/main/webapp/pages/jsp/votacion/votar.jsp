@@ -10,8 +10,9 @@
 <body>
 	<h1>Ingreso de votación</h1>
 	<c:set var="votarView" scope="request" value="${votarView}" />
-	<span style="color: red">${errorMsg}</span>
-	<span style="color: green">${successMsg}</span>
+	<p>
+		<span style="color: red">${errorMsg}</span> <span style="color: green">${successMsg}</span>
+	</p>
 	<form action="/Web/jsp/votacion/procesar" method="post">
 		<p>
 			<span style="font-weight: bold">Categoría: </span>${votarView.tema.categoria}</p>
@@ -27,14 +28,14 @@
 				</c:forEach>
 			</select>
 		</p>
-        <p>
-            <span style="font-weight: bold">Valoracion: </span> <select
-                name="valoracion">
-                <c:forEach items="${votarView.valoracionesList}" var="valoracion">
-                    <option value="${valoracion}">${valoracion}</option>
-                </c:forEach>
-            </select>
-        </p>		
+		<p>
+			<span style="font-weight: bold">Valoracion: </span> <select
+				name="valoracion">
+				<c:forEach items="${votarView.valoracionesList}" var="valoracion">
+					<option value="${valoracion}">${valoracion}</option>
+				</c:forEach>
+			</select>
+		</p>
 		<p>
 			<input type="submit" value="Enviar" /> <input type="hidden"
 				value="${votarView.tema.id}" name="idTema" />
