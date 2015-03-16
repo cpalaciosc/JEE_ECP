@@ -33,6 +33,7 @@ public class Dispatcher extends HttpServlet {
             throws ServletException, IOException {
         LogManager.getLogger(clazz).debug("PathInfo " + request.getPathInfo());
         String view = "home";
+        request.setCharacterEncoding("UTF-8");
         if (request.getPathInfo() != null) {
             String action = request.getPathInfo().substring(1);
             switch (action) {
@@ -83,6 +84,7 @@ public class Dispatcher extends HttpServlet {
             throws ServletException, IOException {
         LogManager.getLogger(clazz).debug("PathInfo " + request.getPathInfo());
         String view = "home";
+        request.setCharacterEncoding("UTF-8");
         if (request.getPathInfo() != null) {
             String action = request.getPathInfo().substring(1);
             switch (action) {
