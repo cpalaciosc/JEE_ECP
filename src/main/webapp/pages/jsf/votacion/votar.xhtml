@@ -19,27 +19,34 @@
 			<h:form>
 				<p:messages id="messages" showDetail="true" autoUpdate="true"
 					closable="true" />
-				<h:panelGrid id="grid" columns="2" cellpadding="5">
-					<h:outputText value="#{msgs.categoria}: " />
-					<p:selectOneMenu id="categoria" value="#{votarView.selectedIdTema}">
-						<p:ajax listener="#{votarView.onCategoriaChange}"
-							update="votacion" />
-						<f:selectItem itemLabel="#{msgs.seleccion_categoria}"
-							itemValue="-1" noSelectionOption="true" />
-						<f:selectItems value="#{votarView.listTemas}" var="tema"
-							itemValue="#{tema.id}" itemLabel="#{tema.categoria}" />
-					</p:selectOneMenu>
-				</h:panelGrid>
+				<p:outputPanel>
+					<h:panelGroup>
+						<h:panelGrid id="grid" columns="2" cellpadding="5">
+							<h:outputText value="#{msgs.categoria}: " />
+							<p:selectOneMenu id="categoria"
+								value="#{votarView.selectedIdTema}">
+								<p:ajax listener="#{votarView.onCategoriaChange}"
+									update="votacion" />
+								<f:selectItem itemLabel="#{msgs.seleccion_categoria}"
+									itemValue="-1" noSelectionOption="true" />
+								<f:selectItems value="#{votarView.listTemas}" var="tema"
+									itemValue="#{tema.id}" itemLabel="#{tema.categoria}" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+					</h:panelGroup>
+				</p:outputPanel>
 
 				<p:outputPanel id="votacion">
 					<h:panelGroup rendered="#{votarView.showFields}">
-						<h:outputText value="Pregunta: #{votarView.tema.pregunta}" />
 						<h:panelGrid id="grid1" columns="2" cellpadding="5">
-							<h:outputText value="#{msgs.valoracion}" />
+							<h:outputText value="Pregunta: " />
+							<h:outputText value="#{votarView.tema.pregunta}" />
+
+							<h:outputText value="#{msgs.valoracion}: " />
 							<p:rating value="#{votarView.votacion.valoracion}" stars="10"
 								required="true" requiredMessage="#{msgs.requerido}" />
 
-							<h:outputText value="#{msgs.nivel_estudios}" />
+							<h:outputText value="#{msgs.nivel_estudios}: " />
 							<p:selectOneMenu value="#{votarView.selectedNivelEstudio}">
 								<f:selectItem itemLabel="#{msgs.seleccion_nivel_estudios}"
 									itemValue="" noSelectionOption="true" />
