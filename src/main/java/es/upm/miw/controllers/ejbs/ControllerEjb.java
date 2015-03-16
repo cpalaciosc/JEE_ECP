@@ -15,7 +15,7 @@ public abstract class ControllerEjb {
     protected List<Tema> consultarTemas() {
         ITemaDao temaDao = DaoFactory.getFactory().getTemaDao();
         List<Tema> result = temaDao.findAll();
-        LogManager.getLogger(clazz).debug("Consultando los temas " + result.size());
+        LogManager.getLogger(clazz).debug("Se han encontrado " + result.size()+ " temas");
         return result;
     }
 
