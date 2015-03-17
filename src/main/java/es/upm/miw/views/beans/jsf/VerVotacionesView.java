@@ -2,6 +2,7 @@ package es.upm.miw.views.beans.jsf;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 import es.upm.miw.controllers.IVerVotacionesController;
@@ -16,20 +17,19 @@ public class VerVotacionesView extends ViewBean {
 
     }
 
+    @PostConstruct
+    public void init() {
+        IVerVotacionesController verVotacionesController = this.getControllerFactory()
+                .getVerVotacionesController();
+        temaValoracionMediaList = verVotacionesController.obtenerValoracionesMediaPorTema();
+    }
+
     public List<TemaValoracionMedia> getTemaValoracionMediaList() {
         return temaValoracionMediaList;
     }
 
     public void setTemaValoracionMediaList(List<TemaValoracionMedia> temaValoracionMediaList) {
         this.temaValoracionMediaList = temaValoracionMediaList;
-    }
-
-    public String generarReporte() {
-        IVerVotacionesController verVotacionesController = this.getControllerFactory()
-                .getVerVotacionesController();
-        temaValoracionMediaList = verVotacionesController.obtenerValoracionesMediaPorTema();
-        return "votacion/ver";
-
     }
 
 }
