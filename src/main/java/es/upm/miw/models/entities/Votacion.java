@@ -1,5 +1,7 @@
 package es.upm.miw.models.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,13 +13,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import es.upm.miw.models.utils.NivelEstudio;
 
 @Entity
-public class Votacion {
+@XmlRootElement
+public class Votacion implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     public static final String TABLE = "votacion";
 
     public static final String ID = "id";
