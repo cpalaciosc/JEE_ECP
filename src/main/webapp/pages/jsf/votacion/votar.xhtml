@@ -17,14 +17,15 @@
 			</p:breadCrumb>
 			<h2>#{msgs.realizar_votacion}</h2>
 			<h:form>
-				<p:messages id="messages" showDetail="true" autoUpdate="true"
+				<p:messages id="messages" showDetail="false" autoUpdate="true"
 					closable="true" />
 				<p:outputPanel>
 					<h:panelGroup>
 						<h:panelGrid id="grid" columns="2" cellpadding="5">
 							<h:outputText value="#{msgs.categoria}: " />
 							<p:selectOneMenu id="categoria"
-								value="#{votarView.selectedIdTema}">
+								value="#{votarView.selectedIdTema}"
+								requiredMessage="Debe selecionar la categoria">
 								<p:ajax listener="#{votarView.onCategoriaChange}"
 									update="votacion" />
 								<f:selectItem itemLabel="#{msgs.seleccion_categoria}"
@@ -44,10 +45,10 @@
 
 							<h:outputText value="#{msgs.valoracion}: " />
 							<p:rating value="#{votarView.votacion.valoracion}" stars="10"
-								required="true" requiredMessage="#{msgs.requerido}" />
+								required="true" requiredMessage="#{msgs.ingrese_valoracion}" />
 
 							<h:outputText value="#{msgs.nivel_estudios}: " />
-							<p:selectOneMenu value="#{votarView.selectedNivelEstudio}">
+							<p:selectOneMenu value="#{votarView.selectedNivelEstudio}" required="true" requiredMessage="#{msgs.ingrese_nivel_estudio}">
 								<f:selectItem itemLabel="#{msgs.seleccion_nivel_estudios}"
 									itemValue="" noSelectionOption="true" />
 								<f:selectItems value="#{votarView.nivelEstudioList}"
