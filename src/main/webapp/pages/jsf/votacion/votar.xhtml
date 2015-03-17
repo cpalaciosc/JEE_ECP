@@ -48,7 +48,8 @@
 								required="true" requiredMessage="#{msgs.ingrese_valoracion}" />
 
 							<h:outputText value="#{msgs.nivel_estudios}: " />
-							<p:selectOneMenu value="#{votarView.selectedNivelEstudio}" required="true" requiredMessage="#{msgs.ingrese_nivel_estudio}">
+							<p:selectOneMenu value="#{votarView.selectedNivelEstudio}"
+								required="true" requiredMessage="#{msgs.ingrese_nivel_estudio}">
 								<f:selectItem itemLabel="#{msgs.seleccion_nivel_estudios}"
 									itemValue="" noSelectionOption="true" />
 								<f:selectItems value="#{votarView.nivelEstudioList}"
