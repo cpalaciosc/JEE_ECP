@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<ui:composition template="../template/commonLayout.xhtml">
+		<ui:define name="content">
+			<p:breadCrumb>
+				<p:menuitem value="#{msgs.inicio}" url="/pages/jsf/home.xhtml" />
+				<p:menuitem value="#{msgs.ver_votaciones_por_tema}"
+					url="/pages/jsf/votacion/ver.xhtml" />
+			</p:breadCrumb>
+			<h2>#{msgs.ver_votaciones_por_tema}</h2>
+
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+			<ui:repeat var="temaValoracionMedia"
+				value="#{verVotacionesView.temaValoracionMediaList}">
+
+				<p:outputPanel>
+					<h:outputText value="#{temaValoracionMedia.tema.categoria}" />
+					<h:outputText value=" - " />
+					<h:outputText value="#{temaValoracionMedia.numeroVotos}" />
+					<h:outputText value=" votos " />
+
+					<p:dataTable var="valoracionMedia"
+						value="#{temaValoracionMedia.valoracionMedia}"
+						style="padding-bottom:20px;">
+						<p:column headerText="#{msgs.valoracion_media}">
+							<h:outputText value="#{valoracionMedia.valor}" />
+						</p:column>
+
+						<p:column headerText="#{msgs.nivel_estudios}">
+							<h:outputText value="#{valoracionMedia.nivelEstudio}" />
+						</p:column>
+					</p:dataTable>
+
+					<p:separator />
+				</p:outputPanel>
+			</ui:repeat>
+
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>
