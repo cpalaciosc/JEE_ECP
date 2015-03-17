@@ -38,6 +38,16 @@ public class Utils {
             ip = request.getRemoteAddr();  
         }  
         return ip;  
-    }    
+    }  
+    
+    
+    public static void dormir(long milis){
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            Thread.interrupted();
+            throw new IllegalStateException(e);
+        }
+    }
 
 }
