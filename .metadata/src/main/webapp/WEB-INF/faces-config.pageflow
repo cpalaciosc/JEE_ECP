@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14259781488370" configfile="/JEE_ECP/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14259781488370" configfile="/JEE_ECP/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/jsf/tema/incorporar.xhtml" x="338" y="178" id="pf142642525750317" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf142644463897423" path="/pages/jsf/tema/incorporar.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/jsf/home.xhtml" x="554" y="370" id="pf142642525750319" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf142644463897423 pf142645881655824" path="/pages/jsf/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/jsf/tema/autorizar.xhtml" x="122" y="562" id="pf142643275359420" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf142643275359421" path="/pages/jsf/tema/autorizar.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/jsf/tema/consultar.xhtml" x="338" y="562" id="pf142643275359422" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf142645881655824" inlinks="pf142643275359421" path="/pages/jsf/tema/consultar.xhtml"/>
+  <links id="pf142643275359421" target="pf142643275359422" source="pf142643275359420" outcome="tema/consultar" redirect="true" fromaction="#{autorizarView.verificar}"/>
+  <links id="pf142644463897423" target="pf142642525750319" source="pf142642525750317" outcome="home" redirect="true" fromaction="#{incorporarTemaView.incorporarTema}"/>
+  <links id="pf142645881655824" target="pf142642525750319" source="pf142643275359422" outcome="home" redirect="true" fromaction="#{eliminarTemaView.verificar}"/>
+</pageflow:Pageflow>
