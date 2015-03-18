@@ -3,6 +3,7 @@ package es.upm.miw.ws.rest;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -28,7 +29,7 @@ public class TemaResource {
     @POST
     @Consumes({MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_XML})
-    public Response create(Tema tema) {
+    public Response incorporar(Tema tema) {
         LogManager.getLogger(clazz).debug("Llamada al metodo create " + tema);
         ITemaDao temaDao = DaoFactory.getFactory().getTemaDao();
         temaDao.create(tema);
@@ -36,11 +37,24 @@ public class TemaResource {
         return Response.ok(tema).build();
     }
     
-    public static final String CODIGO_SEGURIDAD = "666";
+    
+    @GET
+    @Path(TemaUris.PATH_ID_PARAM)
+    @Consumes({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_XML})
+    public Response consultar(@PathParam("id") Integer id) {
+        ITemaDao temaDao = DaoFactory.getFactory().getTemaDao();
+        Tema tema = temaDao.read(id);
+        LogManager.getLogger(clazz).debug("Buscar tema con id "+tema.getId());
+        return Response.ok(tema).build();
+    }
+    
+    
+    private static final String CODIGO_SEGURIDAD = "666";
 
     @DELETE
     @Path(TemaUris.PATH_ID_PARAM)
-    public Response delete(@PathParam("id") Integer id, @QueryParam("code") String code) {
+    public Response eliminar(@PathParam("id") Integer id, @QueryParam("code") String code) {
         if(code==null){
             code = "";
         }
