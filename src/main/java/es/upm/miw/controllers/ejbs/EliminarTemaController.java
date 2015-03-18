@@ -26,7 +26,7 @@ public class EliminarTemaController extends ControllerEjb implements IEliminarTe
         return temaDao.read(idTema)==null? true: false;
     }
 
-    public static final String CODIGO_SEGURIDAD = "666";
+    private static final String CODIGO_SEGURIDAD = "666";
 
     @Override
     public boolean autorizar(String codigoSeguridad) {
