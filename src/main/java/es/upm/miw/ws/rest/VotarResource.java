@@ -12,9 +12,9 @@ import org.apache.logging.log4j.LogManager;
 import es.upm.miw.models.daos.DaoFactory;
 import es.upm.miw.models.daos.IVotacionDao;
 import es.upm.miw.models.entities.Votacion;
-import es.upm.miw.ws.VotacionUris;
+import es.upm.miw.ws.VotarUris;
 
-@Path(VotacionUris.PATH_VOTACION)
+@Path(VotarUris.PATH_VOTACION)
 public class VotarResource {
 
     private final static Class<VotarResource> clazz = VotarResource.class;
