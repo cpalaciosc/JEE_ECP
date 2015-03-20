@@ -33,4 +33,10 @@ public class EliminarTemaController extends ControllerEjb implements IEliminarTe
         return codigoSeguridad.equals(CODIGO_SEGURIDAD);
     }
 
+    @Override
+    public void eliminarTema(int idTema, String codigoSeguridad) {
+        throw new UnsupportedOperationException("Operacion permitida via REST");
+        
+    }
+
 }
