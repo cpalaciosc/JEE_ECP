@@ -1,5 +1,11 @@
 package es.upm.miw.controllers.ws;
 
+import java.util.List;
+
+import es.upm.miw.models.entities.Tema;
+import es.upm.miw.ws.TemaUris;
+import es.upm.miw.ws.utils.TemasWrapper;
+
 
 abstract class ControllerWs {
 
@@ -20,5 +26,13 @@ abstract class ControllerWs {
     protected static WsManager buildWebServiceManager(String... paths){
         return new WsManager(URI, paths);
     }
+    
+    public List<Tema> consultarTemas() {
+        WsManager wsManager = ControllerWs.buildWebServiceManager(TemaUris.PATH_TEMAS);
+        if (wsManager.read()) {
+            return wsManager.entity(TemasWrapper.class).getListTemas();
+        }
+        return null;
+    }    
 
 }
