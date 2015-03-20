@@ -7,17 +7,12 @@ import es.upm.miw.models.entities.Tema;
 import es.upm.miw.models.entities.Votacion;
 import es.upm.miw.ws.TemaUris;
 import es.upm.miw.ws.VotarUris;
-import es.upm.miw.ws.utils.TemasWrapper;
 
 public class VotarController extends ControllerWs implements IVotarController {
 
     @Override
     public List<Tema> consultarTemas() {
-        WsManager wsManager = ControllerWs.buildWebServiceManager(TemaUris.PATH_TEMAS);
-        if (wsManager.read()) {
-            return wsManager.entity(TemasWrapper.class).getListTemas();
-        }
-        return null;
+        return super.consultarTemas();
     }
 
     @Override
