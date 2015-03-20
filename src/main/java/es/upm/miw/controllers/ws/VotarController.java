@@ -6,6 +6,7 @@ import es.upm.miw.controllers.IVotarController;
 import es.upm.miw.models.entities.Tema;
 import es.upm.miw.models.entities.Votacion;
 import es.upm.miw.ws.TemaUris;
+import es.upm.miw.ws.VotarUris;
 import es.upm.miw.ws.utils.TemasWrapper;
 
 public class VotarController extends ControllerWs implements IVotarController {
@@ -32,8 +33,7 @@ public class VotarController extends ControllerWs implements IVotarController {
 
     @Override
     public boolean votar(Votacion votacion) {
-        // TODO Auto-generated method stub
-        return false;
+        return ControllerWs.buildWebServiceManager(VotarUris.PATH_VOTACION).create(votacion);
     }
 
 }
