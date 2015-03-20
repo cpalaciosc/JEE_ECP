@@ -34,7 +34,7 @@ public class EliminarTemaController extends ControllerEjb implements IEliminarTe
     }
 
     @Override
-    public void eliminarTema(int idTema, String codigoSeguridad) {
+    public boolean eliminarTema(int idTema, String codigoSeguridad) {
         throw new UnsupportedOperationException("Operacion permitida via REST");
         
     }

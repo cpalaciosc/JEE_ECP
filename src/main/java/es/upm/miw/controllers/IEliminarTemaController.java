@@ -11,5 +11,7 @@ public interface IEliminarTemaController {
     public List<Tema> consultarTemas();
 
     public boolean eliminarTema(int idTema);
+    
+    public boolean eliminarTema(int idTema, String codigoSeguridad);
 
 }
