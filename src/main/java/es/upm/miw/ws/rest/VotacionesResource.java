@@ -16,6 +16,7 @@ import es.upm.miw.models.entities.Tema;
 import es.upm.miw.models.utils.TemaValoracionMedia;
 import es.upm.miw.models.utils.ValoracionMedia;
 import es.upm.miw.ws.VotacionesUris;
+import es.upm.miw.ws.utils.VotacionesWrapper;
 
 @Path(VotacionesUris.PATH_VOTACIONES)
 public class VotacionesResource {
@@ -37,7 +38,9 @@ public class VotacionesResource {
             tmp.setNumeroVotos(numeroVotos);
             listTemaValoracionMedias.add(tmp);
         }
-        return Response.ok(listTemaValoracionMedias).build();
+        VotacionesWrapper votaciones = new VotacionesWrapper();
+        votaciones.setVotaciones(listTemaValoracionMedias);
+        return Response.ok(votaciones).build();
     }
 
 }
