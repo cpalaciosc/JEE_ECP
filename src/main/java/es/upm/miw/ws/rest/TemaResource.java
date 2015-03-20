@@ -1,5 +1,7 @@
 package es.upm.miw.ws.rest;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,6 +21,7 @@ import es.upm.miw.models.daos.DaoFactory;
 import es.upm.miw.models.daos.ITemaDao;
 import es.upm.miw.models.entities.Tema;
 import es.upm.miw.ws.TemaUris;
+import es.upm.miw.ws.utils.TemasWrapper;
 
 @Stateless
 @Path(TemaUris.PATH_TEMAS)
@@ -47,6 +50,18 @@ public class TemaResource {
         Tema tema = temaDao.read(id);
         LogManager.getLogger(clazz).debug("Buscar tema con id "+tema.getId());
         return Response.ok(tema).build();
+    }
+    
+    @GET
+    @Consumes({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_XML})
+    public Response consultar() {
+        ITemaDao temaDao = DaoFactory.getFactory().getTemaDao();
+        List<Tema> listTemas = temaDao.findAll();
+        TemasWrapper temasWrapper = new TemasWrapper();
+        temasWrapper.setListTemas(listTemas);
+        LogManager.getLogger(clazz).debug("Temas encontrados "+listTemas.size());
+        return Response.ok(temasWrapper).build();
     }
     
     
